@@ -1,19 +1,18 @@
-
-      <div class="modal-header">
-        <h5 class="modal-title">Add a new skill</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for(@users_skill, url: "/my/users/#{current_user.id}/users_skills", remote: true) do |f| %>
-          <%= f.association :skill, collection: @skills, input_html: { class: "select2" } %>
-          <%= f.input :level, collection: UsersSkill.levels%>
-          <%= f.input :previous_skills %>
-          <%= f.button :submit, class: 'btn btn-outline-primary' %>
-        <% end -%>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      </div>
+<div class="modal-header">
+  <h5 class="modal-title">Add a new skill</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <%= simple_form_for([current_user, @users_skill], url: my_user_users_skills_path, remote: true) do |f| %>
+    <%= f.association :skill, collection: @skills, input_html: { class: "select2" } %>
+    <%= f.input :level, collection: UsersSkill.levels%>
+    <%= f.input :previous_skills %>
+    <%= f.button :submit, class: 'btn btn-outline-primary' %>
+  <% end -%>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+</div>

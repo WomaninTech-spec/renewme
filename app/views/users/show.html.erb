@@ -1,3 +1,39 @@
 <div class="container">
+  <h1><%= @user.username %>'s profile</h1>
+  <% unless @followings_user.id %>
+    <%= simple_form_for([ @user, @followings_user]) do |f|%>
+      <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary" %>
+    <% end -%>
+  <% else %>
+    <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning' %>
+  <% end -%>
+  <h2>Current skills</h2>
+  <% unless @current_users_skills.blank? %>
+    <% @current_users_skills.each do |user_skill| %>
+    <%= user_skill.skill.name %>
+    <%= user_skill.level %>
+    <% end -%>
+  <% else %>
+    <p>No current skills.</p>
+  <% end %>
 
+  <h2>Previous skills</h2>
+  <% unless @previous_users_skills.blank? %>
+    <% @previous_users_skills.each do |user_skill| %>
+      <%= user_skill.skill.name %>
+      <%= user_skill.level %>
+    <% end -%>
+  <% else %>
+    <p>No current skills.</p>
+  <% end -%>
+
+  <h2>Experiences</h2>
+  <% unless @experiences.blank? %>
+    <% @experiences.each do |experience| %>
+      <%= experience.content %>
+    <% end -%>
+  <% else %>
+    <p>No experiences.</p>
+  <% end %>
 </div>
+

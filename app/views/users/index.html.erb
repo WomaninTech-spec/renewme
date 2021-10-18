@@ -1,11 +1,16 @@
-<div class="container">
+<div class="container mt-3">
   <div class="cards">
     <% @users.each do |user| %>
       <div class="card-user">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <% if user.profile_picture.attached? %>
+            <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
+        <% else %>
+           <%= image_tag "no-avatar.png", class: "avatar-square" %>
+        <% end -%>
         <div class="card-user-infos">
           <h2><%= link_to user.username, user_path(user) %></h2>
           <p><%= user.job_position %></p>
+          <p><%= user.role.capitalize %></p>
         </div>
       </div>
     <% end -%>

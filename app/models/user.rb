@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  before_validation :change_role_value
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -19,8 +18,9 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :username, :job_position, presence: true
 
-  def change_role_value
-    self.role = role.to_i
+  def role=(value)
+    value = value.to_i if value.is_a? String
+    super(value)
   end
 
   def find_or_create_chatroom_with(other_user)

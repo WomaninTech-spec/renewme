@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="cards">
+    <% @users.each do |user| %>
+      <div class="card-user">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-user-infos">
+          <h2><%= link_to user.username, user_path(user) %></h2>
+          <p><%= user.job_position %></p>
+        </div>
+      </div>
+    <% end -%>
+  </div>
+</div>

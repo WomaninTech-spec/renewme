@@ -1,0 +1,7 @@
+$("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
+$("#modal-window").modal();
+
+$('.select2').select2({ theme: 'bootstrap4', dropdownParent: $('#modal-window') });
+$('#users_skill_level').barrating({
+    theme: 'bars-movie'
+  });

@@ -24,11 +24,18 @@ require("channels")
 
 // External imports
 import "bootstrap";
+var jQuery = require('jquery')
 
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+import { initSelect2 } from '../plugins/init_select2.js';
+import { initBarRating } from '../plugins/init_barrating.js';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  // initSelect2();
+  initSelect2();
+  initBarRating();
 });
+
+

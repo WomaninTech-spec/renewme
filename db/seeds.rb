@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'json'
+
+file = File.read('skills.json')
+data_hash = JSON.parse(file)
+data_hash["data"].each do |skill|
+  Skill.create!(name: skill["name"])
+end

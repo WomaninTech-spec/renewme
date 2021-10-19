@@ -1,0 +1,49 @@
+<div class="container">
+  <h1>My profile</h1>
+  <% if current_user.role == "candidate" %>
+  <%= link_to 'Add a skill', new_my_user_users_skill_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-primary'}  %>
+  <%= link_to 'Add an experience', new_my_user_experience_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-experience', class: 'btn btn-outline-primary'}  %>
+
+  <h2>Current skills</h2>
+  <% unless @current_users_skills.blank? %>
+    <% @current_users_skills.each do |user_skill| %>
+    <%= user_skill.skill.name %>
+    <%= user_skill.level %>
+    <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+    <% end -%>
+  <% else %>
+    <p>No current skills.</p>
+  <% end %>
+  <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+
+  <h2>Previous skills</h2>
+  <% unless @previous_users_skills.blank? %>
+    <% @previous_users_skills.each do |user_skill| %>
+      <%= user_skill.skill.name %>
+      <%= user_skill.level %>
+      <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+    <% end -%>
+  <% else %>
+    <p>No current skills.</p>
+  <% end -%>
+
+  <h2>Experiences</h2>
+  <% unless @experiences.blank? %>
+    <% @experiences.each do |experience| %>
+      <%= experience.content %>
+      <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+    <% end -%>
+  <% else %>
+    <p>No experiences.</p>
+  <% end %>
+  <div id="modal-experience" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+</div>
+<% end -%>

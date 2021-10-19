@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Sign up</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :username %>
+      <%= f.input :job_position %>
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }%>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :about_me, as: :text %>
+      <%= f.input :profile_picture, as: :file %>
+      <%= f.input :role, as: :radio_buttons, collection: User.roles, checked: User.roles.first %>
+      <%= f.input :visible, label: "Make your profile visible and searchable" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
+</div>

@@ -31,11 +31,12 @@ window.$ = window.jQuery = jQuery;
 // Internal imports, e.g:
 import { initSelect2 } from '../plugins/init_select2.js';
 import { initBarRating } from '../plugins/init_barrating.js';
+import { initChatroomCable } from '../channels/chatroom_channel.js'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   initSelect2();
   initBarRating();
+  initChatroomCable();
 });
-
 

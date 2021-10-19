@@ -1,7 +1,9 @@
 <div class="container">
   <h1>My profile</h1>
+  <% if current_user.role == "candidate" %>
   <%= link_to 'Add a skill', new_my_user_users_skill_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-primary'}  %>
   <%= link_to 'Add an experience', new_my_user_experience_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-experience', class: 'btn btn-outline-primary'}  %>
+
   <h2>Current skills</h2>
   <% unless @current_users_skills.blank? %>
     <% @current_users_skills.each do |user_skill| %>
@@ -17,6 +19,7 @@
       <div class="modal-content"></div>
     </div>
   </div>
+
   <h2>Previous skills</h2>
   <% unless @previous_users_skills.blank? %>
     <% @previous_users_skills.each do |user_skill| %>
@@ -27,6 +30,7 @@
   <% else %>
     <p>No current skills.</p>
   <% end -%>
+
   <h2>Experiences</h2>
   <% unless @experiences.blank? %>
     <% @experiences.each do |experience| %>
@@ -42,3 +46,4 @@
     </div>
   </div>
 </div>
+<% end -%>

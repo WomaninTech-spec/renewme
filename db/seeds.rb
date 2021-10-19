@@ -7,8 +7,40 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'json'
 
-file = File.read('skills.json')
-data_hash = JSON.parse(file)
-data_hash["data"].each do |skill|
-  Skill.create!(name: skill["name"])
+if Skill.count == 0
+  file = File.read('skills.json')
+  data_hash = JSON.parse(file)
+  data_hash["data"].each do |skill|
+    Skill.create!(name: skill["name"])
+  end
+end
+if User.where(email:"jdurant@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Jean",
+    last_name: "Durant",
+    email: "jdurant@example.com",
+    username: "jdurant",
+    password: "password",
+    job_position: "Web developer",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"cmarchand@example.com").first.nil?
+  user_2 = User.new(
+    first_name: "Cecile",
+    last_name: "Marchand",
+    email: "cmarchand@example.com",
+    username: "cmarchand",
+    password: "password",
+    job_position: "Project Manager",
+    role: 0,
+    visible: true
+  )
+  user_2.skip_confirmation_notification!
+  user_2.skip_confirmation!
+  user_2.save!
 end

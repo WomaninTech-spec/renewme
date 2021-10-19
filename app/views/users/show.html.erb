@@ -7,33 +7,81 @@
   <% else %>
     <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning' %>
   <% end -%>
-  <h2>Current skills</h2>
-  <% unless @current_users_skills.blank? %>
-    <% @current_users_skills.each do |user_skill| %>
-    <%= user_skill.skill.name %>
-    <%= user_skill.level %>
-    <% end -%>
-  <% else %>
-    <p>No current skills.</p>
-  <% end %>
+  <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
+  <span class="btn btn-secondary" data-toggle="modal" data-target="#modal-message">Send a message</span>
+  <div id="modal-message" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Send a message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
+            <div id="content">
+            <% @chatroom.messages.all.each do |message| %>
+              <p><%= message.user.username %>: <%= message.content %></p>
+            <% end -%>
+            </div>
+          </div>
+          <%= simple_form_for([current_user, @message], remote: true) do |f| %>
+            <%= f.input :content %>
+            <%= f.button :submit, class: 'btn btn-outline-primary' %>
+          <% end -%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
 
-  <h2>Previous skills</h2>
-  <% unless @previous_users_skills.blank? %>
-    <% @previous_users_skills.each do |user_skill| %>
+    </div>
+  </div>
+
+  <h2>About me</h2>
+  <%= @user.about_me %>
+
+  <% if @user.role == "candidate" %>
+    <h2>Current skills</h2>
+    <% unless @current_users_skills.blank? %>
+      <% @current_users_skills.each do |user_skill| %>
       <%= user_skill.skill.name %>
       <%= user_skill.level %>
+      <% end -%>
+    <% else %>
+      <p>No current skills.</p>
+    <% end %>
+
+    <h2>Previous skills</h2>
+    <% unless @previous_users_skills.blank? %>
+      <% @previous_users_skills.each do |user_skill| %>
+        <%= user_skill.skill.name %>
+        <%= user_skill.level %>
+      <% end -%>
+    <% else %>
+      <p>No current skills.</p>
     <% end -%>
-  <% else %>
-    <p>No current skills.</p>
+
+    <h2>Experiences</h2>
+    <% unless @experiences.blank? %>
+      <% @experiences.each do |experience| %>
+        <%= experience.content %>
+      <% end -%>
+    <% else %>
+      <p>No experiences.</p>
+    <% end %>
   <% end -%>
 
-  <h2>Experiences</h2>
-  <% unless @experiences.blank? %>
-    <% @experiences.each do |experience| %>
-      <%= experience.content %>
-    <% end -%>
-  <% else %>
-    <p>No experiences.</p>
-  <% end %>
+  <h2>Followers</h2>
+  <% @user.followees.each do |follower| %>
+    <%= link_to follower.follower.username, user_path(follower.follower) %>
+  <% end -%>
+
+  <h2>Followees</h2>
+  <% @user.followers.each do |followee| %>
+    <%= link_to followee.followee.username, user_path(followee.followee) %>
+  <% end -%>
 </div>
 

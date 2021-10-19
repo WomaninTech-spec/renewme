@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>My messages</h1>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Chatroom</th>
+      <th scope="col">Last message</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.chatrooms.each do |chatroom| %>
+    <tr>
+      <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
+      <td><%= chatroom.messages.last.content %></td>
+      <td>@mdo</td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>
+</div>

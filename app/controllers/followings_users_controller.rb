@@ -14,6 +14,7 @@ class FollowingsUsersController < ApplicationController
   def destroy
     @followings_user = FollowingsUser.find(params[:id])
     @followings_user.destroy
+    flash[:notice] = "You no longer follow this user."
     redirect_to user_path(@followings_user.followee)
   end
 end

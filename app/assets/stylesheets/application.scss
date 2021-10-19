@@ -17,3 +17,10 @@
 .users_skill_previous_skills {
   margin-top: 2rem;
 }
+
+#messages {
+  height: 200px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}

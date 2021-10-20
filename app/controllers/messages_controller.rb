@@ -17,11 +17,13 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     @chatroom = @message.chatroom
+    @other_user = @chatroom.messages.where.not(user: current_user).first.user
     if @message.save
       ChatroomChannel.broadcast_to(
         @chatroom,
         render_to_string(partial: "message", locals: { message: @message })
       )
+      NotificationsChannel.broadcast_to(@other_user.id, render_to_string( partial: "notifications/notification", locals: { user: current_user}))
       #flash[:notice] = "Message sent."
       #redirect_to user_path(@other_user)
     else

@@ -14,10 +14,9 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @chatroom = current_user.find_or_create_chatroom_with(@other_user)
     @message = Message.new(message_params)
     @message.user = current_user
-    @message.chatroom = @chatroom
+    @chatroom = @message.chatroom
     if @message.save
       ChatroomChannel.broadcast_to(
         @chatroom,
@@ -26,7 +25,7 @@ class MessagesController < ApplicationController
       #flash[:notice] = "Message sent."
       #redirect_to user_path(@other_user)
     else
-      render 'new'
+      render 'chatrooms/show'
     end
   end
 
@@ -37,6 +36,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :chatroom_id)
   end
 end

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @experiences = Experience.where(user: current_user)
     @message = Message.new
     @chatroom = current_user.find_or_create_chatroom_with(@user)
+    @message.chatroom = @chatroom
     @followings_user = FollowingsUser.where(followee: params[:id], follower: current_user).first
     unless @followings_user
       @followings_user = FollowingsUser.new

@@ -22,11 +22,14 @@
           <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
             <div id="content">
             <% @chatroom.messages.all.each do |message| %>
-              <p><%= message.user.username %>: <%= message.content %></p>
+              <% unless message.content == "subscription" %>
+                <p><%= message.user.username %>: <%= message.content %></p>
+              <% end -%>
             <% end -%>
             </div>
           </div>
           <%= simple_form_for([current_user, @message], remote: true) do |f| %>
+            <%= f.input :chatroom_id, as: :hidden, value: @message.chatroom.id %>
             <%= f.input :content %>
             <%= f.button :submit, class: 'btn btn-outline-primary' %>
           <% end -%>

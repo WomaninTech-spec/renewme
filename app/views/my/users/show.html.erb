@@ -7,9 +7,10 @@
   <h2>Current skills</h2>
   <% unless @current_users_skills.blank? %>
     <% @current_users_skills.each do |user_skill| %>
-    <%= user_skill.skill.name %>
-    <%= user_skill.level %>
-    <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+      <p><%= user_skill.skill.name %>
+      <%= user_skill.level %>
+      <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+      </p>
     <% end -%>
   <% else %>
     <p>No current skills.</p>
@@ -23,9 +24,11 @@
   <h2>Previous skills</h2>
   <% unless @previous_users_skills.blank? %>
     <% @previous_users_skills.each do |user_skill| %>
+      <p>
       <%= user_skill.skill.name %>
       <%= user_skill.level %>
       <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+      </p>
     <% end -%>
   <% else %>
     <p>No current skills.</p>
@@ -34,8 +37,9 @@
   <h2>Experiences</h2>
   <% unless @experiences.blank? %>
     <% @experiences.each do |experience| %>
-      <%= experience.content %>
+      <p><%= experience.content %>
       <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
+      </p>
     <% end -%>
   <% else %>
     <p>No experiences.</p>

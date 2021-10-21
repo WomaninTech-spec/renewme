@@ -1,3 +1,30 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'reconversion-professionnelle.jpg' %>);">
+  <div class="container">
+    <h1>Welcome to <span class="r-reversed-banner">&#7449;</span>eNewMe the retraining site</h1>
+    <p>The beginning of the new version of You!</p>
+    <% unless user_signed_in? %>
+      <a class="btn btn-outline-success" href="<%= new_user_registration_path %>">Join now</a>
+    <% end -%>
+  </div>
+</div>
+<div class="container">
+  <h2>Latest retraining users</h2>
+  <div class="cards">
+    <% @users.each do |user| %>
+      <div class="card-user">
+        <% if user.profile_picture.attached? %>
+            <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
+        <% else %>
+           <%= image_tag "no-avatar.png", class: "avatar-square" %>
+        <% end -%>
+        <div class="card-user-infos">
+          <h2><%= link_to user.username, user_path(user) %></h2>
+          <p><%= user.job_position %></p>
+          <p><%= user.role.capitalize %></p>
+        </div>
+      </div>
+    <% end -%>
+  </div>
+  <h2>Latest jobs</h2>
+  <h2>Latest articles</h2>
+</div>

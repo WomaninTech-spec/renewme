@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :chatrooms, only: :show
   end
   namespace :my do
+    resources :jobs
     resources :users, only: [:show] do
       resources :users_skills
       resources :experiences

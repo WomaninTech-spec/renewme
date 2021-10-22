@@ -1,0 +1,14 @@
+<%= form_for @article do |format| %>
+
+  <%= f.label :name, "Enter the name of the article" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :title, "Enter the title of the article" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, "Enter the content of the article" %>
+  <%= f.text_field :content %>
+
+  <%= f.submit %>
+<% end %>
+

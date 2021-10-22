@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <%= simple_form_for([current_user, @message], remote:true, url: user_messages_path) do |f| %>
+  <%= simple_form_for([@other_user, @message], remote: true) do |f| %>
     <%= f.input :chatroom_id, as: :hidden, value: @message.chatroom.id %>
     <%= f.input :content %>
     <%= f.button :submit %>

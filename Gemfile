@@ -35,6 +35,7 @@ gem 'devise'
 gem 'cloudinary'
 gem 'pg_search'
 gem 'active_link_to'
+gem 'pagy'
 
 group :development, :test do
   gem 'pry-byebug'

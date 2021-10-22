@@ -3,12 +3,13 @@ class UsersController < ApplicationController
 
   def index
     if params[:query] && !params[:query].empty?
-      if params[:query] =~ /(r|R){1}(e|E){1}(c|C){1}(r|R)?(u|U)?(i|I)?(t|T)?(e|E)?(r|R)?/
-        @query = 1
-      elsif params[:query] =~ /(c|C){1}(a|A){1}(n|N){1}(d|D)?(i|I)?(d|D)?(a|A)?(t|T)?(e|E)?/
-        @query = 0
-      end
-      @users = User.global_search(@query).where.not(visible: false, confirmed_at: nil, id: current_user)
+      # if params[:query] =~ /(r|R){1}(e|E){1}(c|C){1}(r|R)?(u|U)?(i|I)?(t|T)?(e|E)?(r|R)?/
+      #   @query = 1
+      # elsif params[:query] =~ /(c|C){1}(a|A){1}(n|N){1}(d|D)?(i|I)?(d|D)?(a|A)?(t|T)?(e|E)?/
+      #   @query = 0
+      # end
+      @role = SearchRole.new(params[:query])
+      @users = User.global_search(@role.get_role).where.not(visible: false, confirmed_at: nil, id: current_user)
       @users += User.global_search(params[:query]).where.not(visible: false, confirmed_at: nil, id: current_user)
     else
       @users = User.where.not(visible: false, confirmed_at: nil, id: current_user)

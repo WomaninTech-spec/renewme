@@ -1,14 +1,21 @@
 <div class="container">
   <h1><%= @user.username %>'s profile</h1>
-  <% unless @followings_user.id %>
-    <%= simple_form_for([ @user, @followings_user]) do |f|%>
-      <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary" %>
-    <% end -%>
-  <% else %>
-    <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning' %>
-  <% end -%>
+  <div class="row">
+    <div class="col-2">
+      <% unless @followings_user.id %>
+        <%= simple_form_for([ @user, @followings_user]) do |f|%>
+          <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary" %>
+        <% end -%>
+      <% else %>
+        <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning' %>
+      <% end -%>
+    </div>
   <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
-  <span class="btn btn-secondary" data-toggle="modal" data-target="#modal-message">Send a message</span>
+    <div class="col-3">
+      <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-message">Send a message</span>
+    </div>
+  </div>
+
   <div id="modal-message" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -22,11 +29,14 @@
           <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
             <div id="content">
             <% @chatroom.messages.all.each do |message| %>
-              <p><%= message.user.username %>: <%= message.content %></p>
+              <% unless message.content == "subscription" %>
+                <p><%= message.user.username %>: <%= message.content %></p>
+              <% end -%>
             <% end -%>
             </div>
           </div>
-          <%= simple_form_for([current_user, @message], remote: true) do |f| %>
+          <%= simple_form_for([@user, @message], remote: true) do |f| %>
+            <%= f.input :chatroom_id, as: :hidden, value: @message.chatroom.id %>
             <%= f.input :content %>
             <%= f.button :submit, class: 'btn btn-outline-primary' %>
           <% end -%>
@@ -41,14 +51,45 @@
   </div>
 
   <h2>About me</h2>
-  <%= @user.about_me %>
+  <p><%= @user.about_me %></p>
 
   <% if @user.role == "candidate" %>
     <h2>Current skills</h2>
     <% unless @current_users_skills.blank? %>
       <% @current_users_skills.each do |user_skill| %>
-      <%= user_skill.skill.name %>
-      <%= user_skill.level %>
+        <%= user_skill.skill.name %>
+        <%= user_skill.level %>
+        <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
+        <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Recommend this user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <% @recommandation.users_skill = user_skill %>
+                <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
+                  <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
+                  <%= f.input :content %>
+                  <%= f.button :submit, class: 'btn btn-outline-primary' %>
+                <% end -%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <% unless user_skill.recommandations.blank? %>
+          <h5>Recommendations</h5>
+          <% user_skill.recommandations.each do |recommandation| %>
+            <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+          <% end -%>
+        <% end -%>
       <% end -%>
     <% else %>
       <p>No current skills.</p>
@@ -59,6 +100,34 @@
       <% @previous_users_skills.each do |user_skill| %>
         <%= user_skill.skill.name %>
         <%= user_skill.level %>
+        <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
+        <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Recommend this user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <% @recommandation.users_skill = user_skill %>
+                <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
+                  <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
+                  <%= f.input :content %>
+                  <%= f.button :submit, class: 'btn btn-outline-primary' %>
+                <% end -%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <% user_skill.recommandations.each do |recommandation| %>
+          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+        <% end -%>
       <% end -%>
     <% else %>
       <p>No current skills.</p>
@@ -67,7 +136,7 @@
     <h2>Experiences</h2>
     <% unless @experiences.blank? %>
       <% @experiences.each do |experience| %>
-        <%= experience.content %>
+        <p><%= experience.content %></p>
       <% end -%>
     <% else %>
       <p>No experiences.</p>
@@ -75,13 +144,20 @@
   <% end -%>
 
   <h2>Followers</h2>
-  <% @user.followees.each do |follower| %>
-    <%= link_to follower.follower.username, user_path(follower.follower) %>
-  <% end -%>
-
+  <% unless @user.followees.blank? %>
+    <% @user.followees.each do |follower| %>
+      <%= link_to follower.follower.username, user_path(follower.follower) %>
+    <% end -%>
+  <% else %>
+    <p>No followers.</p>
+  <% end %>
   <h2>Followees</h2>
-  <% @user.followers.each do |followee| %>
-    <%= link_to followee.followee.username, user_path(followee.followee) %>
-  <% end -%>
+  <% unless @user.followers.blank? %>
+    <% @user.followers.each do |followee| %>
+      <%= link_to followee.followee.username, user_path(followee.followee) %>
+    <% end -%>
+  <% else %>
+    <p>No followees.</p>
+  <% end %>
 </div>
 

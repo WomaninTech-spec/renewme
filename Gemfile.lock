@@ -37,6 +37,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (6.0.4.1)
       activesupport (= 6.0.4.1)
       globalid (>= 0.3.6)
@@ -131,6 +134,7 @@ GEM
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (4.11.0)
     pg (1.2.3)
     pg_search (2.3.5)
       activerecord (>= 5.2)
@@ -182,6 +186,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.4.0)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -257,6 +262,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_link_to
   autoprefixer-rails (= 10.2.5)
   bootsnap (>= 1.4.2)
   byebug
@@ -267,12 +273,14 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  pagy
   pg (>= 0.18, < 2.0)
   pg_search
   pry-byebug
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.1)
+  redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
   simple_form

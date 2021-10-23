@@ -22,6 +22,7 @@ if User.where(email:"jdurant@example.com").first.nil?
     username: "jdurant",
     password: "password",
     job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
     role: 0,
     visible: true
   )
@@ -37,6 +38,7 @@ if User.where(email:"cmarchand@example.com").first.nil?
     username: "cmarchand",
     password: "password",
     job_position: "Project Manager",
+    about_me: "New graduate from Le Wagon",
     role: 0,
     visible: true
   )

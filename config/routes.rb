@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :followings_users, only: [:create, :destroy]
     resources :messages
-    resources :chatrooms, only: :show
+    resources :chatrooms, only: :show do
+      post "mark_as_read", on: :member
+    end
     resources :recommandations, only: :create
   end
   namespace :my do

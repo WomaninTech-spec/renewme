@@ -2,19 +2,22 @@
     <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
       <%= text_field_tag :query,
         params[:query],
-        class: "form-control",
+        class: "form-control rounded-pill",
         type: "search",
         placeholder: "Find a user"
       %>
-      <%= submit_tag "Search", class: "btn btn-outline-primary ml-3" %>
+      <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill ml-3" %>
     <% end %>
+    <% if @users.empty? %>
+      <p>No results found.</p>
+    <% end -%>
   <div class="cards">
     <% @users.each do |user| %>
       <div class="card-user">
         <% if user.profile_picture.attached? %>
-            <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
+            <%= cl_image_tag user.profile_picture.key, class: "avatar" %>
         <% else %>
-           <%= image_tag "no-avatar.png", class: "avatar-square" %>
+           <%= image_tag "no-avatar.png", class: "avatar" %>
         <% end -%>
         <div class="card-user-infos">
           <h2><%= link_to user.username, user_path(user) %></h2>

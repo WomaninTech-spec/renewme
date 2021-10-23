@@ -1,53 +1,152 @@
 <div class="container">
   <h1>My profile</h1>
+  <hr>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h2>About me</h2>
+          <p><%= current_user.about_me %></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
   <% if current_user.role == "candidate" %>
-  <%= link_to 'Add a skill', new_my_user_users_skill_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-primary'}  %>
-  <%= link_to 'Add an experience', new_my_user_experience_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-experience', class: 'btn btn-outline-primary'}  %>
+    <div class="row mb-3">
+      <div class="col-12">
+        <%= link_to 'Add a skill', new_my_user_users_skill_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-primary rounded-pill'}  %>
+        <%= link_to 'Add an experience', new_my_user_experience_path(current_user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-experience', class: 'btn btn-outline-primary rounded-pill'}  %>
 
-  <h2>Current skills</h2>
-  <% unless @current_users_skills.blank? %>
-    <% @current_users_skills.each do |user_skill| %>
-      <p><%= user_skill.skill.name %>
-      <%= user_skill.level %>
-      <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
-      </p>
-    <% end -%>
-  <% else %>
-    <p>No current skills.</p>
-  <% end %>
-  <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content"></div>
+      </div>
     </div>
-  </div>
+    <div class="row mb-3">
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
 
-  <h2>Previous skills</h2>
-  <% unless @previous_users_skills.blank? %>
-    <% @previous_users_skills.each do |user_skill| %>
-      <p>
-      <%= user_skill.skill.name %>
-      <%= user_skill.level %>
-      <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
-      </p>
-    <% end -%>
-  <% else %>
-    <p>No current skills.</p>
+            <h2>Current skills</h2>
+            <% unless @current_users_skills.blank? %>
+              <% @current_users_skills.each do |user_skill| %>
+                <div class="card-skill">
+                  <div class="card-skill-infos mr-auto">
+                    <h2><%= user_skill.skill.name %></h2>
+                    <p><%= user_skill.level.capitalize %></p>
+                  </div>
+                  <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
+                </div>
+                <% unless user_skill.recommandations.blank? %>
+                  <div class="recommandations">
+                    <h5>Recommendations</h5>
+                    <div class="recommendations-list">
+                      <div>
+                        <% user_skill.recommandations.each do |recommandation| %>
+                          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+                        <% end -%>
+
+                      </div>
+                    </div>
+
+                  </div>
+                <% end -%>
+              <% end -%>
+            <% else %>
+              <p>No current skills.</p>
+            <% end %>
+            <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2>Previous skills</h2>
+            <% unless @previous_users_skills.blank? %>
+              <% @previous_users_skills.each do |user_skill| %>
+                <div class="card-skill">
+                  <div class="card-skill-infos mr-auto">
+                    <h2><%= user_skill.skill.name %></h2>
+                    <p><%= user_skill.level.capitalize %></p>
+                  </div>
+                  <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
+                </div>
+                <% unless user_skill.recommandations.blank? %>
+                  <div class="recommandations">
+                    <h5>Recommendations</h5>
+                    <div class="recommendations-list">
+                      <div>
+                        <% user_skill.recommandations.each do |recommandation| %>
+                          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+                        <% end -%>
+
+                      </div>
+                    </div>
+
+                  </div>
+                <% end -%>
+              <% end -%>
+            <% else %>
+              <p>No current skills.</p>
+            <% end -%>
+
+            <h2>Experiences</h2>
+
+              <% unless @experiences.blank? %>
+              <div class="experiences">
+                <% @experiences.each do |experience| %>
+                  <div class="row mb-1">
+                    <p class="mr-auto"><%= experience.content %></p>
+                    <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill' %>
+
+                  </div>
+
+                <% end -%>
+              </div>
+              <% else %>
+                <p>No experiences.</p>
+              <% end %>
+
+            <div id="modal-experience" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end -%>
+  <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
 
-  <h2>Experiences</h2>
-  <% unless @experiences.blank? %>
-    <% @experiences.each do |experience| %>
-      <p><%= experience.content %>
-      <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %>
-      </p>
-    <% end -%>
-  <% else %>
-    <p>No experiences.</p>
-  <% end %>
-  <div id="modal-experience" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content"></div>
+            <h2>Followers</h2>
+            <% unless current_user.followees.blank? %>
+              <% @current_user.followees.each do |follower| %>
+                <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
+              <% end -%>
+            <% else %>
+              <p>No followers.</p>
+            <% end %>
+
+            <h2>Followees</h2>
+            <% unless @current_user.followers.blank? %>
+              <% @current_user.followers.each do |followee| %>
+                <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
+              <% end -%>
+            <% else %>
+              <p>No followees.</p>
+            <% end %>
+
+
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
-<% end -%>

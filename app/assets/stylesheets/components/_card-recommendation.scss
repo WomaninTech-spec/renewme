@@ -1,0 +1,24 @@
+.recommandations {
+  padding: 5px 30px;
+  border: 1px solid #D6DBF2;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 50px;
+  margin: 0 0 15px 50px;
+}
+
+.recommandations h5 {
+  font-size: 16px;
+}
+
+.recommendations-list {
+  max-height: 40px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.recommendations-list p {
+  line-height: 10px;
+  font-size: 12px;
+  margin: 5px;
+}

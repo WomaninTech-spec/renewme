@@ -13,7 +13,6 @@
     <tr>
       <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
       <td><%= chatroom.messages.last.content %></td>
-      <td>@mdo</td>
     </tr>
     <% end -%>
   </tbody>

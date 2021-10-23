@@ -1,18 +1,26 @@
 <div class="container">
   <h1><%= @user.username %>'s profile</h1>
-  <div class="row">
-    <div class="col-2">
-      <% unless @followings_user.id %>
-        <%= simple_form_for([ @user, @followings_user]) do |f|%>
-          <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary" %>
-        <% end -%>
-      <% else %>
-        <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning' %>
-      <% end -%>
-    </div>
-  <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
-    <div class="col-3">
-      <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-message">Send a message</span>
+  <hr>
+  <div class="row mb-3">
+    <div class="col-12">
+      <table>
+        <tr>
+          <td>
+            <% unless @followings_user.id %>
+              <%= simple_form_for([ @user, @followings_user]) do |f|%>
+                <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary rounded-pill" %>
+              <% end -%>
+            <% else %>
+              <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning rounded-pill' %>
+            <% end -%>
+          </td>
+        <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
+          <td>
+            <span class="btn btn-outline-primary rounded-pill" data-toggle="modal" data-target="#modal-message">Send a message</span>
+          </td>
+
+        </tr>
+      </table>
     </div>
   </div>
 
@@ -50,114 +58,186 @@
     </div>
   </div>
 
-  <h2>About me</h2>
-  <p><%= @user.about_me %></p>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h2>About me</h2>
+          <p><%= @user.about_me %></p>
 
-  <% if @user.role == "candidate" %>
-    <h2>Current skills</h2>
-    <% unless @current_users_skills.blank? %>
-      <% @current_users_skills.each do |user_skill| %>
-        <%= user_skill.skill.name %>
-        <%= user_skill.level %>
-        <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
-        <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Recommend this user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <% @recommandation.users_skill = user_skill %>
-                <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
-                  <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
-                  <%= f.input :content %>
-                  <%= f.button :submit, class: 'btn btn-outline-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% if @user.role == "candidate" %>
+    <div class="row mb-3">
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+
+            <h2>Current skills</h2>
+            <% unless @current_users_skills.blank? %>
+              <% @current_users_skills.each do |user_skill| %>
+
+
+                <div class="card-skill">
+                  <div class="card-skill-infos mr-auto">
+                    <h2><%= user_skill.skill.name %></h2>
+                    <p><%= user_skill.level.capitalize %></p>
+                  </div>
+                  <span class="btn btn-outline-primary rounded-pill mr-4" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
+                </div>
+
+                <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Recommend this user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <% @recommandation.users_skill = user_skill %>
+                        <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
+                          <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
+                          <%= f.input :content %>
+                          <%= f.button :submit, class: 'btn btn-outline-primary' %>
+                        <% end -%>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% unless user_skill.recommandations.blank? %>
+                  <div class="recommandations">
+                    <h5>Recommendations</h5>
+                    <div class="recommendations-list">
+                      <div>
+                        <% user_skill.recommandations.each do |recommandation| %>
+                          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+                        <% end -%>
+
+                      </div>
+                    </div>
+
+                  </div>
                 <% end -%>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-              </div>
-            </div>
+              <% end -%>
+            <% else %>
+              <p>No current skills.</p>
+            <% end %>
           </div>
         </div>
-        <% unless user_skill.recommandations.blank? %>
-          <h5>Recommendations</h5>
-          <% user_skill.recommandations.each do |recommandation| %>
-            <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
-          <% end -%>
-        <% end -%>
-      <% end -%>
-    <% else %>
-      <p>No current skills.</p>
-    <% end %>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
 
-    <h2>Previous skills</h2>
-    <% unless @previous_users_skills.blank? %>
-      <% @previous_users_skills.each do |user_skill| %>
-        <%= user_skill.skill.name %>
-        <%= user_skill.level %>
-        <span class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
-        <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Recommend this user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <% @recommandation.users_skill = user_skill %>
-                <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
-                  <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
-                  <%= f.input :content %>
-                  <%= f.button :submit, class: 'btn btn-outline-primary' %>
+            <h2>Previous skills</h2>
+            <% unless @previous_users_skills.blank? %>
+              <% @previous_users_skills.each do |user_skill| %>
+                <div class="card-skill">
+                  <div class="card-skill-infos mr-auto">
+                    <h2><%= user_skill.skill.name %></h2>
+                    <p><%= user_skill.level.capitalize %></p>
+                  </div>
+                  <span class="btn btn-outline-primary rounded-pill mr-4" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
+                </div>
+
+                <div id="modal-recommandation-<%= user_skill.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Recommend this user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <% @recommandation.users_skill = user_skill %>
+                        <%= simple_form_for([@user, @recommandation], remote: true) do |f| %>
+                          <%= f.input :users_skill_id, as: :hidden, value: @recommandation.users_skill.id %>
+                          <%= f.input :content %>
+                          <%= f.button :submit, class: 'btn btn-outline-primary' %>
+                        <% end -%>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% unless user_skill.recommandations.blank? %>
+                  <div class="recommandations">
+                    <h5>Recommendations</h5>
+                    <div class="recommendations-list">
+                      <div>
+                        <% user_skill.recommandations.each do |recommandation| %>
+                          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
+                        <% end -%>
+
+                      </div>
+                    </div>
+
+                  </div>
                 <% end -%>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-              </div>
-            </div>
+              <% end -%>
+            <% else %>
+              <p>No current skills.</p>
+            <% end -%>
+
+            <h2>Experiences</h2>
+
+              <% unless @experiences.blank? %>
+                <div class="experiences">
+                  <% @experiences.each do |experience| %>
+                      <p><%= experience.content %></p>
+                  <% end -%>
+                </div>
+              <% else %>
+                <p>No experiences.</p>
+              <% end %>
+
+
           </div>
         </div>
-        <% user_skill.recommandations.each do |recommandation| %>
-          <p><%= recommandation.user.username %>: <%= recommandation.content %></p>
-        <% end -%>
-      <% end -%>
-    <% else %>
-      <p>No current skills.</p>
-    <% end -%>
+      </div>
 
-    <h2>Experiences</h2>
-    <% unless @experiences.blank? %>
-      <% @experiences.each do |experience| %>
-        <p><%= experience.content %></p>
-      <% end -%>
-    <% else %>
-      <p>No experiences.</p>
-    <% end %>
-  <% end -%>
+    </div>
+    <% end -%>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
 
-  <h2>Followers</h2>
-  <% unless @user.followees.blank? %>
-    <% @user.followees.each do |follower| %>
-      <%= link_to follower.follower.username, user_path(follower.follower) %>
-    <% end -%>
-  <% else %>
-    <p>No followers.</p>
-  <% end %>
-  <h2>Followees</h2>
-  <% unless @user.followers.blank? %>
-    <% @user.followers.each do |followee| %>
-      <%= link_to followee.followee.username, user_path(followee.followee) %>
-    <% end -%>
-  <% else %>
-    <p>No followees.</p>
-  <% end %>
+            <h2>Followers</h2>
+            <% unless @user.followees.blank? %>
+              <% @user.followees.each do |follower| %>
+                <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
+              <% end -%>
+            <% else %>
+              <p>No followers.</p>
+            <% end %>
+
+            <h2>Followees</h2>
+            <% unless @user.followers.blank? %>
+              <% @user.followers.each do |followee| %>
+                <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
+              <% end -%>
+            <% else %>
+              <p>No followees.</p>
+            <% end %>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 

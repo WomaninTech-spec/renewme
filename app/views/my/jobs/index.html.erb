@@ -1,0 +1,14 @@
+<h1>Jobs posting</h1>
+
+<%= link_to "Post a new job", new_my_user_job_path, remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
+
+<% @jobs.each do |job| %>
+ <p><%= job.title %></p>
+ <p><%= job.description %></p>
+ <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
+<% end %>
+<div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

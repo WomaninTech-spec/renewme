@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :users_skills
   has_many :skills, through: :users_skills
   has_many :experiences
+  has_many :jobs
   has_one_attached :profile_picture
 
   validates :first_name, :last_name, :username, :job_position, :about_me, presence: true

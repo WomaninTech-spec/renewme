@@ -1,0 +1,11 @@
+<%= form_for @job do |f| %>
+
+  <%= f.label :title, "Enter the title of the job" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :description, "Enter the content of the job" %>
+  <%= f.text_field :description %>
+
+  <%= f.submit %>
+<% end %>
+

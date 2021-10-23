@@ -1,12 +1,10 @@
 <h1>Articles posting</h1>
 
-<%= link_to "Write a new artcile", new_article_path %>
+<%= link_to "Write a new article", new_article_path %>
 
 <% @articles.each do |article| %>
- <h2><% article.name %></h2>
- <p><% article.title %></p>
- <p><% article.content %></p>
- <%= link_to "Go to see", articles_path(articles) %>
- <%= link_to "Delete", articles_path(article), method :delete %>
-
+ <p><%= article.title %></p>
+ <p><%= article.content %></p>
+ <%= link_to "Go to see", article_path(articles) %>
+ <%= link_to "Delete", article_path(article), method: :delete %>
 <% end %>

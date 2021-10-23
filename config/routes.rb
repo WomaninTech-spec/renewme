@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   resources :articles
-  resources :jobs, only: [:index,:show]
-  namespace :my do
-    resources :jobs
-  end
 
 
 
@@ -18,10 +14,10 @@ Rails.application.routes.draw do
     resources :recommandations, only: :create
   end
   namespace :my do
-    resources :jobs
     resources :users, only: [:show] do
       resources :users_skills
       resources :experiences
+      resources :jobs
     end
   end
 end

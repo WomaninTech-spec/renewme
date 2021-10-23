@@ -5,6 +5,6 @@
 <% @articles.each do |article| %>
  <p><%= article.title %></p>
  <p><%= article.content %></p>
- <%= link_to "Go to see", article_path(articles) %>
+ <%= link_to "Go to see", article_path(article) %>
  <%= link_to "Delete", article_path(article), method: :delete %>
 <% end %>

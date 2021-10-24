@@ -4,7 +4,8 @@
     <div id="content">
     <% @chatroom.messages.each do |message| %>
       <% unless message.content == "subscription" %>
-        <p><%= message.user.username %>: <%= message.content %></p>
+        <% html = "<strong>#{message.content}</strong>".html_safe %>
+        <p><%= message.user.username %>: <%= message.read == false && message.user != current_user ? html : message.content %></p>
       <% end -%>
     <% end -%>
     </div>

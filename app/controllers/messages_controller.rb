@@ -31,6 +31,18 @@ class MessagesController < ApplicationController
     end
   end
 
+  def messages_unread
+    @chatrooms = Chatroom.eager_load(:messages).where("messages.user_id = ?", current_user.id)
+    @count = 0
+    @chatrooms.each do |chatroom|
+      @count += chatroom.messages.where.not(user: current_user, read: true).count
+    end
+    respond_to do |format|
+      msg = { status: "ok", unread: @count }
+      format.json { render json: msg } # don't do msg.to_json
+    end
+  end
+
   private
 
   def set_other_user

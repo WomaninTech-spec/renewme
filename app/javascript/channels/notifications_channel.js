@@ -7,7 +7,6 @@ const initNotificationsCable = () => {
     const id = notifications.dataset.userId;
     consumer.subscriptions.create({ channel: "NotificationsChannel", id: id }, {
       received(data) {
-        console.log(data)
         notifications.insertAdjacentHTML('beforeend', data);
       },
     });

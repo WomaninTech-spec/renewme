@@ -33,6 +33,8 @@ import { initSelect2 } from '../plugins/init_select2.js';
 import { initBarRating } from '../plugins/init_barrating.js';
 import { initChatroomCable } from '../channels/chatroom_channel.js'
 import { initNotificationsCable } from '../channels/notifications_channel.js'
+import { initMsgUnread } from '../helpers/init_msg_unread.js'
+import { markRead } from '../helpers/init_mark_read.js'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -40,5 +42,23 @@ document.addEventListener('turbolinks:load', () => {
   initBarRating();
   initChatroomCable();
   initNotificationsCable();
+  initMsgUnread();
+  setInterval(()=>{initMsgUnread()}, 3000);
+  markRead();
 });
 
+  // const init = setInterval(initMsgUnread(), 1000);
+  // clearInterval(init);
+  // var interval = setInterval(initMsgUnread(), 1000);
+
+  // $(document).on('turbolinks:before-cache turbolinks:before-render', function() {
+  //   clearTimeout(interval);
+  // });
+// $(document).ready(function() {
+//   $(document).on('turbolinks:load', function() {
+//     initMsgUnread();
+//   })
+// })
+// $(document).on('turbolinks:load', function() {
+//   markRead();
+// })

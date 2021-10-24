@@ -5,15 +5,17 @@
     <tr>
       <th scope="col">Chatroom</th>
       <th scope="col">Last message</th>
-      <th scope="col">Handle</th>
     </tr>
   </thead>
   <tbody>
     <% current_user.chatrooms.each do |chatroom| %>
-    <tr>
-      <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
-      <td><%= chatroom.messages.last.content %></td>
-    </tr>
+      <% unless chatroom.messages.last.content == "subscription" %>
+        <tr>
+          <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
+          <% html = "<strong>#{chatroom.messages.last.content}</strong>".html_safe %>
+          <td><%= chatroom.messages.last.read == false && chatroom.messages.last.user != current_user ? html : chatroom.messages.last.content %></td>
+        </tr>
+      <% end -%>
     <% end -%>
   </tbody>
 </table>

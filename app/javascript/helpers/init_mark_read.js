@@ -5,7 +5,7 @@ const markRead = () => {
       event.preventDefault();
       //setTimeout(2000);
       //console.log('toto');
-      fetch(`http://localhost:3000/users/${sendMessage.dataset.userId}/chatrooms/${sendMessage.dataset.chatroomId}/mark-as-read`,
+      fetch(`${ENV["HOST"]}/users/${sendMessage.dataset.userId}/chatrooms/${sendMessage.dataset.chatroomId}/mark-as-read`,
       {
         method: 'POST', // or 'PUT'
         headers: {

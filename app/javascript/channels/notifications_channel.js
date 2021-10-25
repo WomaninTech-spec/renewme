@@ -1,4 +1,5 @@
 import consumer from "./consumer";
+import { initMsgUnread } from '../helpers/init_msg_unread.js'
 
 const initNotificationsCable = () => {
   const notifications = document.getElementById('notifications');
@@ -8,6 +9,7 @@ const initNotificationsCable = () => {
     consumer.subscriptions.create({ channel: "NotificationsChannel", id: id }, {
       received(data) {
         notifications.insertAdjacentHTML('beforeend', data);
+        initMsgUnread();
       },
     });
   }

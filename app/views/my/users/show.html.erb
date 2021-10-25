@@ -67,7 +67,7 @@
             <h2>Previous skills</h2>
             <% unless @previous_users_skills.blank? %>
               <% @previous_users_skills.each do |user_skill| %>
-                <div class="card-skill">
+                <div class="card-skill previous-skills">
                   <div class="card-skill-infos mr-auto">
                     <h2><%= user_skill.skill.name %></h2>
                     <p><%= user_skill.level.capitalize %></p>

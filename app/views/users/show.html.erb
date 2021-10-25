@@ -1,26 +1,33 @@
-<div class="container">
-  <h1><%= @user.username %>'s profile</h1>
-  <hr>
-  <div class="row mb-3">
-    <div class="col-12">
-      <table>
-        <tr>
-          <td>
-            <% unless @followings_user.id %>
-              <%= simple_form_for([ @user, @followings_user]) do |f|%>
-                <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary rounded-pill" %>
-              <% end -%>
-            <% else %>
-              <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning rounded-pill' %>
-            <% end -%>
-          </td>
-        <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
-          <td>
-            <button id="send-message" data-user-id="<%= @user.id %>" data-chatroom-id="<%= @chatroom.id %>" class="btn btn-outline-primary rounded-pill" data-toggle="modal" data-target="#modal-message">Send a message</button>
-          </td>
+<div class="container mt-3">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h1><%= @user.username %>'s profile</h1>
 
-        </tr>
-      </table>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-12">
+          <table>
+            <tr>
+              <td>
+                <% unless @followings_user.id %>
+                  <%= simple_form_for([ @user, @followings_user]) do |f|%>
+                    <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary rounded-pill" %>
+                  <% end -%>
+                <% else %>
+                  <%= link_to 'Unfollow', user_followings_user_path(@user, @followings_user), method: :delete, class: 'btn btn-outline-warning rounded-pill' %>
+                <% end -%>
+              </td>
+            <%#= link_to 'Send a message', new_user_message_path(@user),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-message', class: 'btn btn-outline-primary'}  %>
+              <td>
+                <button id="send-message" data-user-id="<%= @user.id %>" data-chatroom-id="<%= @chatroom.id %>" class="btn btn-outline-primary rounded-pill" data-toggle="modal" data-target="#modal-message">Send a message</button>
+              </td>
+
+            </tr>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -62,8 +69,11 @@
   <div class="row mb-3">
     <div class="col-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-header">
           <h2>About me</h2>
+
+        </div>
+        <div class="card-body">
           <p><%= @user.about_me %></p>
 
         </div>
@@ -73,10 +83,13 @@
     <% if @user.role == "candidate" %>
     <div class="row mb-3">
       <div class="col-12 col-md-6">
-        <div class="card">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h2>Current skills</h2>
+          </div>
           <div class="card-body">
 
-            <h2>Current skills</h2>
+
             <% unless @current_users_skills.blank? %>
               <% @current_users_skills.each do |user_skill| %>
 
@@ -84,7 +97,9 @@
                 <div class="card-skill">
                   <div class="card-skill-infos mr-auto">
                     <h2><%= user_skill.skill.name %></h2>
-                    <p><%= user_skill.level.capitalize %></p>
+                    <!-- <p><%#= user_skill.level.capitalize %></p> -->
+                    <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
+
                   </div>
                   <span class="btn btn-outline-primary rounded-pill mr-4" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
                 </div>
@@ -135,16 +150,20 @@
         </div>
       </div>
       <div class="col-12 col-md-6">
-        <div class="card">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h2>Previous skills</h2>
+          </div>
           <div class="card-body">
 
-            <h2>Previous skills</h2>
+
             <% unless @previous_users_skills.blank? %>
               <% @previous_users_skills.each do |user_skill| %>
-                <div class="card-skill">
+                <div class="card-skill previous-skills">
                   <div class="card-skill-infos mr-auto">
                     <h2><%= user_skill.skill.name %></h2>
-                    <p><%= user_skill.level.capitalize %></p>
+                    <!-- <p><%#= user_skill.level.capitalize %></p> -->
+                    <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
                   </div>
                   <span class="btn btn-outline-primary rounded-pill mr-4" data-toggle="modal" data-target="#modal-recommandation-<%= user_skill.id %>">Recommend</span>
                 </div>
@@ -191,9 +210,14 @@
             <% else %>
               <p>No current skills.</p>
             <% end -%>
+          </div>
+        </div>
+          <div class="card">
+            <div class="card-header">
+              <h2>Experiences</h2>
 
-            <h2>Experiences</h2>
-
+            </div>
+            <div class="card-body">
               <% unless @experiences.blank? %>
                 <div class="experiences">
                   <% @experiences.each do |experience| %>
@@ -204,19 +228,24 @@
                 <p>No experiences.</p>
               <% end %>
 
+            </div>
+
 
           </div>
-        </div>
+
       </div>
 
     </div>
     <% end -%>
     <div class="row">
       <div class="col-12">
-        <div class="card">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h2>Followers</h2>
+
+          </div>
           <div class="card-body">
 
-            <h2>Followers</h2>
             <% unless @user.followees.blank? %>
               <% @user.followees.each do |follower| %>
                 <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
@@ -224,8 +253,14 @@
             <% else %>
               <p>No followers.</p>
             <% end %>
-
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
             <h2>Followees</h2>
+
+            </div>
+            <div class="card-body">
             <% unless @user.followers.blank? %>
               <% @user.followers.each do |followee| %>
                 <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>

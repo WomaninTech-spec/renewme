@@ -1,7 +1,7 @@
 class My::UsersSkillsController < ApplicationController
   def new
     @users_skill = UsersSkill.new
-    @skills = Skill.all
+    @skills = Skill.all.limit(100)
     respond_to do |format|
       format.html
       format.js

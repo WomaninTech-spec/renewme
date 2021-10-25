@@ -84,7 +84,7 @@
     <div class="row mb-3">
       <div class="col-12 col-md-6">
         <div class="card rounded-lg mb-3">
-          <div class="card-header">
+          <div class="card-header text-center">
             <h2>Current skills</h2>
           </div>
           <div class="card-body">
@@ -151,7 +151,7 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card mb-3 rounded-lg">
-          <div class="card-header">
+          <div class="card-header text-center">
             <h2>Previous skills</h2>
           </div>
           <div class="card-body">
@@ -213,7 +213,7 @@
           </div>
         </div>
           <div class="card rounded-lg">
-            <div class="card-header">
+            <div class="card-header text-center">
               <h2>Experiences</h2>
 
             </div>
@@ -240,11 +240,11 @@
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="card mb-3 rounded-lg">
-          <div class="card-header">
+          <div class="card-header text-center">
             <h2>Followers</h2>
 
           </div>
-          <div class="card-body">
+          <div class="card-body text-center">
 
             <% unless @user.followees.blank? %>
               <% @user.followees.each do |follower| %>
@@ -258,11 +258,11 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card rounded-lg">
-            <div class="card-header">
+            <div class="card-header text-center">
             <h2>Followees</h2>
 
             </div>
-            <div class="card-body">
+            <div class="card-body text-center">
             <% unless @user.followers.blank? %>
               <% @user.followers.each do |followee| %>
                 <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>

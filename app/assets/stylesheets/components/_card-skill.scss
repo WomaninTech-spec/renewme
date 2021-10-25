@@ -8,6 +8,9 @@
   border-radius: 50px;
   margin-bottom: 15px;
 }
+.card-skill.previous-skills {
+  background: #E4D6F2;
+}
 
 .card-skill img {
   height: 100%;
@@ -30,5 +33,14 @@
 }
 
 .card-skill .card-skill-infos {
-  padding: 0 32px;
+  padding: 0 0 0 32px;
+}
+
+.level {
+  height: 7px;
+  width: 35px;
+  background: #41EFA4;
+  margin-right: 5px;
+  margin-top: 10px;
+  border: 1px solid #A3A3A3;
 }

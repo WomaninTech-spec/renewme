@@ -30,6 +30,70 @@ if User.where(email:"jdurant@example.com").first.nil?
   user_1.skip_confirmation!
   user_1.save!
 end
+if User.where(email:"jpaul@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Jean",
+    last_name: "Paul",
+    email: "jpaul@example.com",
+    username: "jpaul",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"julie@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Julie",
+    last_name: "Julie",
+    email: "julie@example.com",
+    username: "julie",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"barbara@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Barbara",
+    last_name: "Barbara",
+    email: "barbara@example.com",
+    username: "barbara",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"robin@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Robin",
+    last_name: "Robin",
+    email: "robin@example.com",
+    username: "robin",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
 if User.where(email:"cmarchand@example.com").first.nil?
   user_2 = User.new(
     first_name: "Cecile",
@@ -45,4 +109,52 @@ if User.where(email:"cmarchand@example.com").first.nil?
   user_2.skip_confirmation_notification!
   user_2.skip_confirmation!
   user_2.save!
+end
+if User.where(email:"chloe@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Chloe",
+    last_name: "Chloe",
+    email: "chloe@example.com",
+    username: "chloe",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"mustapha@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Mustapha",
+    last_name: "Mustapha",
+    email: "mustapha@example.com",
+    username: "mustapha",
+    password: "password",
+    job_position: "Web developer",
+    about_me: "New graduate from Le Wagon",
+    role: 0,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"madhi@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Madhi",
+    last_name: "Madhi",
+    email: "madhi@example.com",
+    username: "madhi",
+    password: "password",
+    job_position: "IT Recruiter",
+    about_me: "Looking for good candidates",
+    role: 1,
+    visible: true
+  )
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
 end

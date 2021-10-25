@@ -9,10 +9,12 @@ class UsersController < ApplicationController
       #   @query = 0
       # end
       @role = SearchRole.new(params[:query])
-      @users = User.global_search(@role.get_role).where.not(visible: false, confirmed_at: nil, id: current_user)
-      @users += User.global_search(params[:query]).where.not(visible: false, confirmed_at: nil, id: current_user)
+      @search_roles = User.where(role: @role.get_role).where.not(visible: false, confirmed_at: nil, id: current_user)
+      @full_search_array = @search_roles + User.global_search(params[:query]).where.not(visible: false, confirmed_at: nil, id: current_user)
+      @full_search = User.where(id: @full_search_array.map(&:id))
+      @pagy, @users = pagy(@full_search, items: 9)
     else
-      @users = User.where.not(visible: false, confirmed_at: nil, id: current_user)
+      @pagy, @users = pagy(User.where.not(visible: false, confirmed_at: nil, id: current_user), items: 9)
     end
   end
 

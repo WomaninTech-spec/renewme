@@ -1,16 +1,17 @@
 <div class="container mt-3">
-    <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control rounded-pill",
-        type: "search",
-        placeholder: "Find a user"
-      %>
-      <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill ml-3" %>
-    <% end %>
-    <% if @users.empty? %>
-      <p>No results found.</p>
-    <% end -%>
+  <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control rounded-pill",
+      type: "search",
+      placeholder: "Find a user"
+    %>
+    <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill ml-3" %>
+  <% end %>
+  <%== pagy_bootstrap_nav(@pagy) %>
+  <% if @users.empty? %>
+    <p>No results found.</p>
+  <% end -%>
   <div class="cards">
     <% @users.each do |user| %>
       <div class="card-user">

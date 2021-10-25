@@ -8,43 +8,65 @@
   </div>
 </div>
 <div class="container">
-  <h2>Latest retraining users</h2>
-  <div class="cards">
-    <% @users.each do |user| %>
-      <div class="card-user">
-        <% if user.profile_picture.attached? %>
-            <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
-        <% else %>
-           <%= image_tag "no-avatar.png", class: "avatar-square" %>
+  <div class="card rounded-lg mt-3">
+    <div class="card-header">
+      <h2>Latest retraining users</h2>
+
+    </div>
+    <div class="card-body">
+      <div class="cards">
+        <% @users.each do |user| %>
+          <div class="card-user">
+            <% if user.profile_picture.attached? %>
+                <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
+            <% else %>
+               <%= image_tag "no-avatar.png", class: "avatar-square" %>
+            <% end -%>
+            <div class="card-user-infos">
+              <h2><%= link_to user.username, user_path(user) %></h2>
+              <p><%= user.job_position %></p>
+              <p><%= user.role.capitalize %></p>
+            </div>
+          </div>
         <% end -%>
-        <div class="card-user-infos">
-          <h2><%= link_to user.username, user_path(user) %></h2>
-          <p><%= user.job_position %></p>
-          <p><%= user.role.capitalize %></p>
-        </div>
       </div>
-    <% end -%>
+
+    </div>
   </div>
-  <h2>Latest jobs</h2>
-  <div class="cards">
-    <% @jobs.each do |job| %>
-      <div class="card-user">
-        <div class="card-user-infos">
-          <h2><%= link_to job.title, job_path(job) %></h2>
-          <p><%= job.description.truncate(150, separator: ' ') %></p>
-        </div>
+  <div class="card rounded-lg mt-3">
+    <div class="card-header">
+      <h2>Latest jobs</h2>
+
+    </div>
+    <div class="card-body">
+      <div class="cards">
+        <% @jobs.each do |job| %>
+          <div class="card-user">
+            <div class="card-user-infos">
+              <h2><%= link_to job.title, job_path(job) %></h2>
+              <p><%= job.description.truncate(150, separator: ' ') %></p>
+            </div>
+          </div>
+        <% end -%>
       </div>
-    <% end -%>
+    </div>
   </div>
-  <h2>Latest articles</h2>
-  <div class="cards">
-    <% @articles.each do |article| %>
-      <div class="card-user">
-        <div class="card-user-infos">
-          <h2><%= link_to article.title, article_path(article) %></h2>
-          <p><%= article.content.truncate(150, separator: ' ') %></p>
-        </div>
+    <div class="card rounded-lg mt-3">
+      <div class="card-header">
+        <h2>Latest articles</h2>
+
       </div>
-    <% end -%>
+    <div class="card-body">
+      <div class="cards">
+        <% @articles.each do |article| %>
+          <div class="card-user">
+            <div class="card-user-infos">
+              <h2><%= link_to article.title, article_path(article) %></h2>
+              <p><%= article.content.truncate(150, separator: ' ') %></p>
+            </div>
+          </div>
+        <% end -%>
+      </div>
+    </div>
   </div>
 </div>

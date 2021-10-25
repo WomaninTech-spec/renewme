@@ -48,8 +48,8 @@ class User < ApplicationRecord
 
     if chatroom.nil?
       chatroom = Chatroom.create(name: "#{self.username} - #{other_user.username}")
-      Message.create(user: self, chatroom: chatroom, content: "subscription")
-      Message.create(user: other_user, chatroom: chatroom, content: "subscription")
+      Message.create(user: self, chatroom: chatroom, content: "subscription", read: true)
+      Message.create(user: other_user, chatroom: chatroom, content: "subscription", read: true)
     end
     return chatroom
   end

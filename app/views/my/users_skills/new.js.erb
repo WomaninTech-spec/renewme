@@ -1,7 +1,19 @@
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();
 
-$('.select2').select2({ theme: 'bootstrap4', dropdownParent: $('#modal-window') });
+$('.select2').select2({ theme: 'bootstrap4', dropdownParent: $('#modal-window'), ajax: {
+    url: '/skills/search',
+    dataType: 'json',
+    processResults: function (data) {
+      // Transforms the top-level key of the response object from 'items' to 'results'
+      console.log(data)
+      return {
+        results: data
+      };
+    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+  } }
+});
+
 $('#users_skill_level').barrating({
     theme: 'bars-movie'
   });

@@ -7,7 +7,7 @@
     <div class="card-body">
       <div class="row mb-3 justify-content-center">
         <div class="col-12">
-          <table>
+          <table class="m-auto">
             <tr>
               <td>
                 <% unless @followings_user.id %>
@@ -69,11 +69,11 @@
   <div class="row mb-3">
     <div class="col-12">
       <div class="card rounded-lg">
-        <div class="card-header">
+        <div class="card-header text-center">
           <h2>About me</h2>
 
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <p><%= @user.about_me %></p>
 
         </div>
@@ -238,7 +238,7 @@
     </div>
     <% end -%>
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 col-md-6">
         <div class="card mb-3 rounded-lg">
           <div class="card-header">
             <h2>Followers</h2>
@@ -255,6 +255,8 @@
             <% end %>
           </div>
         </div>
+      </div>
+      <div class="col-12 col-md-6">
         <div class="card rounded-lg">
             <div class="card-header">
             <h2>Followees</h2>

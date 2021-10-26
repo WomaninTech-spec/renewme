@@ -27,6 +27,6 @@ class My::ExperiencesController < ApplicationController
   private
 
   def experience_params
-    params.require(:experience).permit(:content)
+    params.require(:experience).permit(:start_date, :end_date, :content)
   end
 end

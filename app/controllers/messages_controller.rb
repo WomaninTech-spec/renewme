@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_other_user, only: [:new, :create]
   def index
-
+    @chatrooms = Chatroom.joins(:messages, :users).where("users.id": current_user).where.not("messages.content": "subscription").order("messages.created_at DESC").uniq
   end
 
   def new

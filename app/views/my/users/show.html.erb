@@ -97,15 +97,26 @@
 
               <% unless @experiences.blank? %>
               <div class="experiences">
+                <ul>
                 <% @experiences.each do |experience| %>
-                  <div class="row mb-1">
-                    <p class="mr-auto"><%= experience.content %></p>
-                    <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill' %>
 
-                  </div>
+                  <div class="d-flex">
+
+
+                    <li class="mr-auto">
+                      From: <%= experience.start_date %> To: <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
+                      <%= experience.content %>
+                    </li>
+                    <div>
+                      <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill' %>
+                    </div>
+
+</div>
 
                 <% end -%>
               </div>
+
+                </ul>
               <% else %>
                 <p>No experiences.</p>
               <% end %>

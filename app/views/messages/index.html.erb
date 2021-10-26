@@ -9,11 +9,11 @@
         <tr>
           <th scope="col">Chatroom</th>
           <th scope="col">Last Message</th>
-          th
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <% current_user.chatrooms.each do |chatroom| %>
+        <% @chatrooms.each do |chatroom| %>
           <% unless chatroom.messages.last.content == "subscription" %>
             <tr>
               <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>

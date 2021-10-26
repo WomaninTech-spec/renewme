@@ -1,22 +1,31 @@
-<div class="container">
-  <h1>My messages</h1>
-  <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Chatroom</th>
-      <th scope="col">Last message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% current_user.chatrooms.each do |chatroom| %>
-      <% unless chatroom.messages.last.content == "subscription" %>
+<div class="container mt-3">
+  <div class="card rounded-lg">
+    <div class="card-header">
+      <h1>My messages</h1>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
-          <% html = "<strong>#{chatroom.messages.last.content}</strong>".html_safe %>
-          <td><%= chatroom.messages.last.read == false && chatroom.messages.last.user != current_user ? html : chatroom.messages.last.content %></td>
+          <th scope="col">Chatroom</th>
+          <th scope="col">Last Message</th>
+          th
         </tr>
-      <% end -%>
-    <% end -%>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+        <% current_user.chatrooms.each do |chatroom| %>
+          <% unless chatroom.messages.last.content == "subscription" %>
+            <tr>
+              <td><%= link_to chatroom.name, user_chatroom_path(current_user,chatroom) %></td>
+              <% html = "<strong>#{chatroom.messages.last.content}</strong>".html_safe %>
+              <td><%= chatroom.messages.last.user.username %>: <%= chatroom.messages.last.read == false && chatroom.messages.last.user != current_user ? html : chatroom.messages.last.content %></td>
+              <td><%= chatroom.messages.where.not(user: current_user, read: true).count %> unread messages</td>
+            </tr>
+          <% end -%>
+        <% end -%>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
 </div>

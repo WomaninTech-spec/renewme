@@ -220,9 +220,15 @@
             <div class="card-body">
               <% unless @experiences.blank? %>
                 <div class="experiences">
-                  <% @experiences.each do |experience| %>
-                      <p><%= experience.content %></p>
-                  <% end -%>
+                  <ul>
+                    <% @experiences.each do |experience| %>
+                      <li class="mr-auto">
+                        From: <%= experience.start_date %> To: <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
+                        <%= experience.content %>
+                      </li>
+                    <% end -%>
+
+                  </ul>
                 </div>
               <% else %>
                 <p>No experiences.</p>

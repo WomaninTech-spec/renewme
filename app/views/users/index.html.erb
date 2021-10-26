@@ -1,31 +1,59 @@
 <div class="container mt-3">
-  <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control rounded-pill",
-      type: "search",
-      placeholder: "Find a user"
-    %>
-    <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill ml-3" %>
-  <% end %>
-  <%== pagy_bootstrap_nav(@pagy) %>
-  <% if @users.empty? %>
-    <p>No results found.</p>
-  <% end -%>
-  <div class="cards">
-    <% @users.each do |user| %>
-      <div class="card-user">
-        <% if user.profile_picture.attached? %>
-            <%= cl_image_tag user.profile_picture.key, class: "avatar" %>
-        <% else %>
-           <%= image_tag "no-avatar.png", class: "avatar" %>
-        <% end -%>
-        <div class="card-user-infos">
-          <h2><%= link_to user.username, user_path(user) %></h2>
-          <p><%= user.job_position %></p>
-          <p><%= user.role.capitalize %></p>
+  <div class="card">
+    <div class="card-header">
+      <h1>All of our users</h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-9">
+          <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
+          <table>
+            <tr>
+              <td>
+                <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control rounded-pill",
+                  type: "search",
+                  placeholder: "Find a user"
+                %>
+
+              </td>
+              <td>
+
+            <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill mt-auto" %>
+              </td>
+            </tr>
+          </table>
+          <% end %>
+
+        </div>
+        <div class="col-2 m-auto">
+          <%== pagy_bootstrap_nav(@pagy) %>
+
         </div>
       </div>
-    <% end -%>
+      <hr>
+      <br>
+      <% if @users.empty? %>
+        <p>No results found.</p>
+      <% end -%>
+      <div class="cards">
+        <% @users.each do |user| %>
+          <div class="card-user">
+            <% if user.profile_picture.attached? %>
+                <%= cl_image_tag user.profile_picture.key, class: "avatar" %>
+            <% else %>
+               <%= image_tag "no-avatar.png", class: "avatar" %>
+            <% end -%>
+            <div class="card-user-infos">
+              <h2><%= link_to user.username, user_path(user) %></h2>
+              <p><%= user.job_position %></p>
+              <p><%= user.role.capitalize %></p>
+            </div>
+          </div>
+        <% end -%>
+      </div>
+
+    </div>
   </div>
 </div>

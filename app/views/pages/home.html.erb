@@ -16,7 +16,7 @@
     <div class="card-body">
       <div class="cards">
         <% @users.each do |user| %>
-          <div class="card-user">
+          <div class="card-user rounded-pill">
             <% if user.profile_picture.attached? %>
                 <%= cl_image_tag user.profile_picture.key, class: "avatar" %>
             <% else %>
@@ -41,7 +41,7 @@
     <div class="card-body">
       <div class="cards">
         <% @jobs.each do |job| %>
-          <div class="card-user">
+          <div class="card-user rounded-pill">
             <div class="card-user-infos">
               <h2><%= link_to job.title, job_path(job) %></h2>
               <p><%= job.description.truncate(150, separator: ' ') %></p>
@@ -59,7 +59,7 @@
     <div class="card-body">
       <div class="cards">
         <% @articles.each do |article| %>
-          <div class="card-user">
+          <div class="card-user rounded-pill">
             <div class="card-user-infos">
               <h2><%= link_to article.title, article_path(article) %></h2>
               <p><%= article.content.truncate(150, separator: ' ') %></p>

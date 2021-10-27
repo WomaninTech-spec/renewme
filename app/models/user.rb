@@ -41,11 +41,11 @@ class User < ApplicationRecord
   end
 
   def find_or_create_chatroom_with(other_user)
-    chatroom = Chatroom.eager_load(:messages).where(
-      messages: { user_id: self.id },
-      messages: { user_id: other_user.id }
-    ).first
-
+    # chatroom = Chatroom.joins(:messages).where(
+    #   messages: { user_id: self.id },
+    #   messages: { user_id: other_user.id }
+    # ).first'
+    chatroom = Chatroom.where("name = ? or name = ?", "#{self.username} - #{other_user.username}", "#{other_user.username} - #{self.username}").first
     if chatroom.nil?
       chatroom = Chatroom.create(name: "#{self.username} - #{other_user.username}")
       Message.create(user: self, chatroom: chatroom, content: "subscription", read: true)

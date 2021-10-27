@@ -204,5 +204,46 @@ if User.where(email:"madhi@example.com").first.nil?
   user_1.skip_confirmation!
   user_1.save!
 end
-
+if User.where(email:"sylvain@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Sylvain",
+    last_name: "Sylvain",
+    email: "sylvain@example.com",
+    username: "sylvain",
+    password: "password",
+    job_position: "IT Recruiter",
+    about_me: "Looking for good candidates",
+    role: 1,
+    visible: true
+  )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
+if User.where(email:"bertrand@example.com").first.nil?
+  user_1 = User.new(
+    first_name: "Bertrand",
+    last_name: "Bertrand",
+    email: "bertrand@example.com",
+    username: "bertrand",
+    password: "password",
+    job_position: "IT Recruiter",
+    about_me: "Looking for good candidates",
+    role: 1,
+    visible: true
+  )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
+  user_1.skip_confirmation_notification!
+  user_1.skip_confirmation!
+  user_1.save!
+end
 

@@ -1,19 +1,27 @@
-<div class="container">
-  <h1><%= @chatroom.name %></h1>
-  <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-    <div id="content">
-    <% @chatroom.messages.each do |message| %>
-      <% unless message.content == "subscription" %>
-        <% html = "<strong>#{message.content}</strong>".html_safe %>
-        <p><%= message.user.username %>: <%= message.read == false && message.user != current_user ? html : message.content %></p>
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h1><%= @chatroom.name %></h1>
+
+    </div>
+    <div class="card-body">
+      <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
+        <div id="content">
+        <% @chatroom.messages.each do |message| %>
+          <% unless message.content == "subscription" %>
+            <% html = "<strong>#{message.content}</strong>".html_safe %>
+            <p><%= message.user.username %>: <%= message.read == false && message.user != current_user ? html : message.content %></p>
+          <% end -%>
+        <% end -%>
+        </div>
+      </div>
+
+      <%= simple_form_for([@other_user, @message], remote: true) do |f| %>
+        <%= f.input :chatroom_id, as: :hidden, value: @message.chatroom.id %>
+        <%= f.input :content %>
+        <%= f.button :submit, value: "Send Message", class:"btn btn-outline-primary rounded-pill btn-block" %>
       <% end -%>
-    <% end -%>
+
     </div>
   </div>
-
-  <%= simple_form_for([@other_user, @message], remote: true) do |f| %>
-    <%= f.input :chatroom_id, as: :hidden, value: @message.chatroom.id %>
-    <%= f.input :content %>
-    <%= f.button :submit %>
-  <% end -%>
 </div>

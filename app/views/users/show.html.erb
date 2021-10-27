@@ -235,10 +235,7 @@
               <% end %>
 
             </div>
-
-
           </div>
-
       </div>
 
     </div>
@@ -248,7 +245,6 @@
         <div class="card mb-3 rounded-lg">
           <div class="card-header text-center">
             <h2>Followers</h2>
-
           </div>
           <div class="card-body text-center">
 
@@ -264,11 +260,10 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card rounded-lg">
-            <div class="card-header text-center">
+          <div class="card-header text-center">
             <h2>Followees</h2>
-
-            </div>
-            <div class="card-body text-center">
+          </div>
+          <div class="card-body text-center">
             <% unless @user.followers.blank? %>
               <% @user.followers.each do |followee| %>
                 <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
@@ -276,12 +271,10 @@
             <% else %>
               <p>No followees.</p>
             <% end %>
-
-
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 </div>
 

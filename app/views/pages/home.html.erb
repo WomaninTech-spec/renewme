@@ -18,9 +18,9 @@
         <% @users.each do |user| %>
           <div class="card-user">
             <% if user.profile_picture.attached? %>
-                <%= cl_image_tag user.profile_picture.key, class: "avatar-square" %>
+                <%= cl_image_tag user.profile_picture.key, class: "avatar" %>
             <% else %>
-               <%= image_tag "no-avatar.png", class: "avatar-square" %>
+               <%= image_tag "no-avatar.png", class: "avatar" %>
             <% end -%>
             <div class="card-user-infos">
               <h2><%= link_to user.username, user_path(user) %></h2>

@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'json'
+require 'open-uri'
 
 if Skill.count == 0
   file = File.read('skills.json')
@@ -26,6 +27,11 @@ if User.where(email:"jdurant@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -42,6 +48,11 @@ if User.where(email:"jpaul@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -58,6 +69,11 @@ if User.where(email:"julie@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=female&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -74,6 +90,11 @@ if User.where(email:"barbara@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=female&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -90,6 +111,11 @@ if User.where(email:"robin@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=25"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -106,6 +132,11 @@ if User.where(email:"cmarchand@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=female&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_2.profile_picture.attach(io:file, filename: results["filename"])
   user_2.skip_confirmation_notification!
   user_2.skip_confirmation!
   user_2.save!
@@ -122,6 +153,11 @@ if User.where(email:"chloe@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=female&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -138,6 +174,11 @@ if User.where(email:"mustapha@example.com").first.nil?
     role: 0,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
@@ -154,7 +195,14 @@ if User.where(email:"madhi@example.com").first.nil?
     role: 1,
     visible: true
   )
+  url = "https://fakeface.rest/face/json?gender=male&minimum_age=35"
+  response = open(url).read
+  results = JSON.parse(response)
+  file = URI.open(results["image_url"])
+  user_1.profile_picture.attach(io:file, filename: results["filename"])
   user_1.skip_confirmation_notification!
   user_1.skip_confirmation!
   user_1.save!
 end
+
+

@@ -1,14 +1,31 @@
-<h1>Jobs posting</h1>
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h1>Jobs posting</h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-md-9">
+          <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
+            <table>
+            </table>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-<%= link_to "Post a new job", new_my_user_job_path, remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
+        <div class="cards">
+            <%= link_to "Post a new job", new_my_user_job_path, remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
 
-<% @jobs.each do |job| %>
- <p><%= job.title %></p>
- <p><%= job.description %></p>
- <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
-<% end %>
-<div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content"></div>
+            <% @jobs.each do |job| %>
+            <p><%= job.title %></p>
+            <p><%= job.description %></p>
+            <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
+            <% end %>
+  <div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+      </div>
+    </div>
   </div>
 </div>

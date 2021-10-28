@@ -1,6 +1,6 @@
 class My::JobsController < ApplicationController
   def index
-    @jobs = Job.all
+    @jobs = current_user.jobs
   end
 
   def show

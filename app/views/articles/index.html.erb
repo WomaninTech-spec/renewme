@@ -15,7 +15,9 @@
     </div>
 
     <div class="cards">
+      <div class="container mt-3">
       <%= link_to "Write a new article", new_article_path %>
+      </div>
       <div class="card-article">
         <% @articles.each do |article| %>
           <p><%= article.title %></p>

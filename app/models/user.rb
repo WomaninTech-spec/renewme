@@ -13,17 +13,18 @@ class User < ApplicationRecord
   # see if can remove user_
   has_many :followees, class_name: 'FollowingsUser', foreign_key: :followee_id
   has_many :followers, class_name: 'FollowingsUser', foreign_key: :follower_id
-  has_many :messages
+  has_many :messages, dependent: :destroy
   has_many :chatrooms, -> { distinct }, through: :messages
-  has_many :users_skills
+  has_many :users_skills, dependent: :destroy
   has_many :skills, through: :users_skills
-  has_many :experiences
-  has_many :jobs
+  has_many :experiences, dependent: :destroy
+  has_many :jobs, dependent: :destroy
+  has_many :articles, dependent: :destroy
   has_one_attached :profile_picture
 
   validates :first_name, :last_name, :username, :job_position, :about_me, presence: true
   validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 3 }
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
   pg_search_scope :global_search,
     against: [:username, :job_position, :role],

@@ -223,8 +223,8 @@
                   <ul>
                     <% @experiences.each do |experience| %>
                       <li class="mr-auto">
-                        From: <%= experience.start_date %> To: <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
-                        <%= experience.content %>
+                        <strong>From:</strong> <%= experience.start_date %> <strong>To:</strong> <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
+                        <em><%= experience.content %></em>
                       </li>
                     <% end -%>
 

@@ -1,11 +1,14 @@
-<div class="container">
+<div class="container mt-3">
   <h1>My profile</h1>
   <hr>
   <div class="row mb-3">
     <div class="col-12">
-      <div class="card">
-        <div class="card-body">
+      <div class="card rounded-lg">
+        <div class="card-header">
           <h2>About me</h2>
+
+        </div>
+        <div class="card-body">
           <p><%= current_user.about_me %></p>
 
         </div>
@@ -22,16 +25,20 @@
     </div>
     <div class="row mb-3">
       <div class="col-12 col-md-6">
-        <div class="card">
+        <div class="card rounded-lg mb-3">
+          <div class="card-header">
+            <h2>Current skills</h2>
+
+          </div>
           <div class="card-body">
 
-            <h2>Current skills</h2>
             <% unless @current_users_skills.blank? %>
               <% @current_users_skills.each do |user_skill| %>
                 <div class="card-skill">
                   <div class="card-skill-infos mr-auto">
                     <h2><%= user_skill.skill.name %></h2>
-                    <p><%= user_skill.level.capitalize %></p>
+                    <p><%#= user_skill.level.capitalize %></p>
+                    <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
                   </div>
                   <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
                 </div>
@@ -62,15 +69,19 @@
         </div>
       </div>
       <div class="col-12 col-md-6">
-        <div class="card">
-          <div class="card-body">
+        <div class="card rounded-lg mb-3">
+          <div class="card-header">
             <h2>Previous skills</h2>
+
+          </div>
+          <div class="card-body">
             <% unless @previous_users_skills.blank? %>
               <% @previous_users_skills.each do |user_skill| %>
                 <div class="card-skill previous-skills">
                   <div class="card-skill-infos mr-auto">
                     <h2><%= user_skill.skill.name %></h2>
-                    <p><%= user_skill.level.capitalize %></p>
+                    <p><%#= user_skill.level.capitalize %></p>
+                    <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
                   </div>
                   <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
                 </div>
@@ -92,9 +103,15 @@
             <% else %>
               <p>No current skills.</p>
             <% end -%>
-
+          </div>
+        </div>
+        <div class="card rounded-lg">
+          <div class="card-header">
             <h2>Experiences</h2>
 
+          </div>
+
+          <div class="card-body">
               <% unless @experiences.blank? %>
               <div class="experiences">
                 <ul>
@@ -104,14 +121,14 @@
 
 
                     <li class="mr-auto">
-                      From: <%= experience.start_date %> To: <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
-                      <%= experience.content %>
+                      <strong>From:</strong> <%= experience.start_date %> <strong>To:</strong> <%= experience.end_date.nil? ? "Currently work here" : experience.end_date %><br>
+                      <em><%= experience.content %></em>
                     </li>
                     <div>
                       <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill' %>
                     </div>
 
-</div>
+                  </div>
 
                 <% end -%>
               </div>
@@ -132,32 +149,42 @@
     </div>
   <% end -%>
   <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
+    <div class="col-12 col-md-6">
+      <div class="card rounded-lg">
+        <div class="card-header">
+          <h2>Followers</h2>
 
-            <h2>Followers</h2>
-            <% unless current_user.followees.blank? %>
-              <% @current_user.followees.each do |follower| %>
-                <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
-              <% end -%>
-            <% else %>
-              <p>No followers.</p>
-            <% end %>
+        </div>
+        <div class="card-body">
 
-            <h2>Followees</h2>
-            <% unless @current_user.followers.blank? %>
-              <% @current_user.followers.each do |followee| %>
-                <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
-              <% end -%>
-            <% else %>
-              <p>No followees.</p>
-            <% end %>
-
-
+          <% unless current_user.followees.blank? %>
+            <% @current_user.followees.each do |follower| %>
+              <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
+            <% end -%>
+          <% else %>
+            <p>No followers.</p>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
+    <div class="col-12 col-md-6">
+      <div class="card rounded-lg">
+        <div class="card-header">
+          <h2>Followees</h2>
 
+        </div>
+        <div class="card-body">
+          <% unless @current_user.followers.blank? %>
+            <% @current_user.followers.each do |followee| %>
+              <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
+            <% end -%>
+          <% else %>
+            <p>No followees.</p>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

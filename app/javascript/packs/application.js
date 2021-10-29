@@ -43,7 +43,7 @@ document.addEventListener('turbolinks:load', () => {
   initChatroomCable();
   initNotificationsCable();
   initMsgUnread();
-  setInterval(()=>{initMsgUnread()}, 3000);
+  //setInterval(()=>{initMsgUnread()}, 3000);
   markRead();
 });
 

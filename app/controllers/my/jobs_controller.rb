@@ -19,7 +19,7 @@ class My::JobsController < ApplicationController
     @job = Job.new(job_params)
     @job.user = current_user
     if @job.save
-      redirect_to my_user_jobs_path
+      redirect_to my_user_job_path(current_user,@job)
     else
       render :new
     end
@@ -31,7 +31,12 @@ class My::JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-    @job.update(params[:job])
+    @job.update(job_params)
+    if @job.save
+      redirect_to my_user_job_path(@job)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -44,6 +49,6 @@ class My::JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :description)
+    params.require(:job).permit(:title, :description, :visible)
   end
 end

@@ -1,11 +1,20 @@
-<%= form_for @job do |f| %>
+<div class="container mt-3">
+  <div class="card rounded-lg">
+    <div class="card-header">
+      <h1>Edit Job</h1>
+    </div>
+    <div class="card-body">
+      <%= simple_form_for([current_user, @job], url: my_user_job_path, remote: true) do |f| %>
 
-  <%= f.label :title, "Enter the title of the job" %>
-  <%= f.text_field :title %>
+        <%= f.input :title, label: "Enter the title of the job" %>
 
-  <%= f.label :description, "Enter the content of the job" %>
-  <%= f.text_field :description %>
+        <%= f.input :description, label: "Enter the content of the job" %>
+        <%= f.input :visible %>
+        <%= f.button :submit, class: 'btn btn-outline-primary' %>
+      <% end -%>
 
-  <%= f.submit %>
-<% end %>
+    </div>
+  </div>
+
+</div>
 

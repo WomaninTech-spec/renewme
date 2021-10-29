@@ -1,5 +1,17 @@
-<h1><%= @job.name %</h1>
-<p><%= @job.title %></p>
-<p><%= @job.content %></p>
+<div class="container mt-3">
+  <div class="card rounded-lg">
+    <div class="card-header">
+      <h1><%= @job.title %></h1>
 
-<%= link_to "Back to List", job_path %>
+    </div>
+    <div class="card-body">
+      <p><%= @job.description %></p>
+      <%= link_to "Edit", edit_my_user_job_path(current_user,@job), class: 'btn btn-outline-primary rounded-pill' %>
+      <%= link_to "Delete", my_user_job_path(current_user,@job), method: :delete, class: 'btn btn-outline-danger rounded-pill' %>
+      <%= link_to "Back to List", my_user_jobs_path , class: 'btn btn-outline-secondary rounded-pill'%>
+
+    </div>
+  </div>
+
+</div>
+

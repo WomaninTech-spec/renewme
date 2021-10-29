@@ -18,6 +18,9 @@
           <%= active_link_to "Users", users_path, class: "nav-link", active: :exclusive %>
         </li>
         <li class="nav-item">
+          <%= active_link_to "Jobs", jobs_path, class: "nav-link", active: :exclusive %>
+        </li>
+        <li class="nav-item">
           <%= active_link_to "Articles", articles_path, class: "nav-link", active: :exclusive %>
         </li>
         <li class="nav-item dropdown">
@@ -30,7 +33,9 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Edit account", edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to "Profile", my_user_path(current_user), class: "dropdown-item" %>
-            <%= link_to "Jobs", my_user_jobs_path(current_user), class: "dropdown-item" %>
+            <% if current_user.role == "recruiter" %>
+              <%= link_to "Jobs", my_user_jobs_path(current_user), class: "dropdown-item" %>
+            <% end -%>
             <div style="position:relative;"><%= link_to "Messages", user_messages_path(current_user), class: "dropdown-item" %><div id="messages-unread-menu"></div></div>
 
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

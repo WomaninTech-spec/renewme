@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <div class="card">
+  <div class="card rounded-lg">
     <div class="card-header">
       <h1>All of our jobs</h1>
     </div>
@@ -19,8 +19,7 @@
 
               </td>
               <td>
-
-            <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill mt-auto" %>
+                <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill mt-auto" %>
               </td>
             </tr>
           </table>
@@ -39,11 +38,11 @@
       <% end -%>
       <div class="cards">
         <% @jobs.each do |job| %>
-          <div class="card-user rounded-pill">
-            <div class="card-user-infos">
+          <div class="card-job rounded-pill">
+            <div class="card-job-infos">
               <h2><%= link_to job.title, job_path(job) %></h2>
               <p><%= job.description.truncate(150, separator: ' ') %></p>
-              <p><%= job.user.username %></p>
+              <p>Recruiter: <%= link_to job.user.username, user_path(job.user) %></p>
             </div>
           </div>
         <% end -%>

@@ -3,29 +3,19 @@
     <div class="card-header">
       <h1>Articles posting</h1>
     </div>
+
     <div class="card-body">
-      <div class="row">
-        <div class="col-12 col-md-9">
-          <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
-            <table>
-            </table>
+      <%= link_to "Write a new article", new_article_path %>
+      <div class="cards">
+        <div class="card-article">
+          <% @articles.each do |article| %>
+            <h3><%= article.title %></h3>
+            <p><%= article.content %></p>
+            <%= link_to "Go to see", article_path(article) %>
+            <%= link_to "Delete", article_path(article), method: :delete %>
           <% end %>
         </div>
       </div>
-    </div>
-
-    <div class="cards">
-      <div class="container mt-3">
-      <%= link_to "Write a new article", new_article_path %>
-      </div>
-      <div class="card-article">
-        <% @articles.each do |article| %>
-          <p><%= article.title %></p>
-          <p><%= article.content %></p>
-          <%= link_to "Go to see", article_path(article) %>
-          <%= link_to "Delete", article_path(article), method: :delete %>
-        <% end %>
-      </div>
-    </div>
   </div>
+</div>
 </div>

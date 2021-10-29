@@ -1,33 +1,39 @@
 <div class="container mt-3">
   <div class="card">
     <div class="card-header">
-      <h1>Jobs posting</h1>
+      <h1>My Jobs</h1>
     </div>
     <div class="card-body">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12 col-md-9">
-          <%= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
+          <%#= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
             <table>
             </table>
-          <% end %>
+          <%# end %>
+        </div>
+      </div> -->
+
+      <%= link_to "Post a new job", new_my_user_job_path, class: 'btn btn-outline-primary rounded-pill', remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
+      <div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content"></div>
         </div>
       </div>
-    </div>
-        <div class="cards">
-          <div class="container mt-3">
-            <%= link_to "Post a new job", new_my_user_job_path, remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
+      <div class="cards mt-3">
+          <% @jobs.each do |job| %>
+          <div class="card-job">
+            <div class="card-job-infos">
+              <h2><%= link_to job.title, my_user_job_path(current_user, job) %></h2>
+              <p><%= job.description.truncate(150, separator: ' ') %></p>
+              <p>Published: <%= job.visible ? "Yes" : "No" %></p>
+              <%= link_to "Edit", edit_my_user_job_path(current_user,job) %>
+              <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
+
+            </div>
+
           </div>
-            <% @jobs.each do |job| %>
-            <p><%= job.title %></p>
-            <p><%= job.description %></p>
-            <%= link_to "Edit", edit_my_user_job_path(current_user,job) %>
-            <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
-            <% end %>
-  <div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-      <div class="modal-content"></div>
+          <% end %>
       </div>
     </div>
   </div>
-</div>
 </div>

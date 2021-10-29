@@ -20,6 +20,7 @@
             <% @jobs.each do |job| %>
             <p><%= job.title %></p>
             <p><%= job.description %></p>
+            <%= link_to "Edit", edit_my_user_job_path(current_user,job) %>
             <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
             <% end %>
   <div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,4 +29,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

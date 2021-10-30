@@ -24,6 +24,8 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import 'trix/dist/trix.css';
+
 const Trix  = require("trix")
 
 var jQuery = require('jquery')

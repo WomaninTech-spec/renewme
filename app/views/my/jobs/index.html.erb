@@ -24,7 +24,7 @@
           <div class="card-job">
             <div class="card-job-infos">
               <h2><%= link_to job.title, my_user_job_path(current_user, job) %></h2>
-              <div class="card-job-description"><%= job.description.html_safe.truncate(150, separator: ' ') %></div>
+              <div class="card-job-description mb-1"><%= job.description.html_safe.truncate(150, separator: ' ') %></div>
               Published: <%= job.visible ? "Yes" : "No" %><br>
               <%= link_to "Edit", edit_my_user_job_path(current_user,job) %>
               <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>

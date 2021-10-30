@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :experiences, dependent: :destroy
   has_many :jobs, dependent: :destroy
   has_many :articles, dependent: :destroy
+  has_many :jobs_applications, dependent: :destroy
   has_one_attached :profile_picture
 
   validates :first_name, :last_name, :username, :job_position, :about_me, presence: true

@@ -1,7 +1,22 @@
 <div class="container mt-3">
-  <h1><%= @job.title %></h1>
-  <p><%= @job.description %></p>
+  <div class="card rounded-lg">
+    <div class="card-header">
+      <h1><%= @job.title %></h1>
 
-  <%= link_to "Back to Jobs", jobs_path %>
+    </div>
+    <div class="card-body">
+      <% if @jobs_application.user.nil? %>
+        <%= simple_form_for([@job, @jobs_application], remote: true) do |f| %>
+          <%= f.button :submit, value: 'Apply to this job', class: 'btn btn-outline-primary rounded-pill' %>
+        <% end -%>
+      <% else %>
+        <span class="btn btn-outline-warning rounded-pill disabled">You already applied to this job.</span>
+      <% end -%>
+      <p><%= @job.description %></p>
+
+      <%= link_to "Back to Jobs", jobs_path %>
+
+    </div>
+  </div>
 
 </div>

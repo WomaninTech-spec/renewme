@@ -9,7 +9,8 @@
 
     <%= f.input :title, label: "Enter the title of the job" %>
 
-    <%= f.input :description, label: "Enter the content of the job" %>
+    <%= f.input :description, as: :hidden %>
+    <trix-editor input="job_description"></trix-editor>
     <%= f.input :visible %>
     <%= f.button :submit, class: 'btn btn-outline-primary' %>
   <% end -%>

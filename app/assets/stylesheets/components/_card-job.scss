@@ -1,6 +1,7 @@
 .card-job {
   overflow: hidden;
   min-height: 100px;
+
   background: #EFE3D0;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
@@ -9,13 +10,25 @@
 }
 
 
+.card-job h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
 .card-job h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-job p {
+.card-job h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-job {
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;
@@ -25,4 +38,8 @@
 
 .card-job .card-job-infos {
   padding: 16px 32px;
+}
+.card-job-description{
+  overflow: auto;
+  max-height: 50px;
 }

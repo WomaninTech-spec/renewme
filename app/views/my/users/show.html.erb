@@ -158,7 +158,7 @@
               <div class="card-job rounded-pill">
                 <div class="card-job-infos">
                   <h2><%= link_to job.title, job_path(job) %></h2>
-                  <p><%= job.description.truncate(150, separator: ' ') %></p>
+                  <p><%= job.description.html_safe.truncate(150, separator: ' ') %></p>
                   <p>Published: <%= job.visible ? "Yes" : "No" %></p>
                 </div>
               </div>

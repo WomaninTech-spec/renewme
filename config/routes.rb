@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   resources :articles
-  resources :jobs
+  resources :jobs do
+    resources :jobs_applications
+  end
   resources :skills, only: [] do
     get "search", on: :collection
   end

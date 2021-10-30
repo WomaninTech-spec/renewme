@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :articles
   resources :jobs do
-    resources :jobs_applications
+    resources :jobs_applications, only: :create
   end
   resources :skills, only: [] do
     get "search", on: :collection
@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       resources :users_skills
       resources :experiences
       resources :jobs
+      resources :jobs_applications, only: [] do
+        get 'my-jobs-applications', on: :collection
+        get 'my-jobs-applicants', on: :collection
+      end
     end
   end
 end

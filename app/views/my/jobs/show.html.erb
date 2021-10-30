@@ -5,10 +5,12 @@
 
     </div>
     <div class="card-body">
-      <%= @job.description.html_safe %>
       <%= link_to "Edit", edit_my_user_job_path(current_user,@job), class: 'btn btn-outline-primary rounded-pill' %>
       <%= link_to "Delete", my_user_job_path(current_user,@job), method: :delete, class: 'btn btn-outline-danger rounded-pill' %>
       <%= link_to "Back to List", my_user_jobs_path , class: 'btn btn-outline-secondary rounded-pill'%>
+      <hr>
+      <%= @job.description.html_safe %>
+
 
     </div>
   </div>

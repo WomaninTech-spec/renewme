@@ -13,6 +13,7 @@
 @import "pages/index";
 @import "select2/dist/css/select2";
 @import "jquery-bar-rating/dist/themes/bars-movie";
+@import 'trix/dist/trix.css';
 
 .users_skill_previous_skills {
   margin-top: 2rem;
@@ -62,4 +63,7 @@
   background: #A9E4D7 !important;
 }
 
+// .trix-content h1 {
+//   font-size: 24px;
+// }
 

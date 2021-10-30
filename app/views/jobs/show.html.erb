@@ -12,7 +12,7 @@
       <% else %>
         <span class="btn btn-outline-warning rounded-pill disabled">You already applied to this job.</span>
       <% end -%>
-      <p><%= @job.description %></p>
+      <p><%= @job.description.html_safe %></p>
 
       <%= link_to "Back to Jobs", jobs_path %>
 

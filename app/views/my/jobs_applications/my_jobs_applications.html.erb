@@ -5,22 +5,22 @@
     </div>
     <div class="card-body">
       <%== pagy_bootstrap_nav(@pagy)  %>
-      <ul class="list-group">
         <div class="row">
           <% @jobs_applications.order(created_at: :desc).each do |jobs_application| %>
-            <li class="list-group-item rounded-pill mb-3 col-5 ml-3">
-
+            <div class="card rounded-pill mb-3 col-5 ml-3">
+              <div class="card-body">
                 You applied to the <%= link_to jobs_application.job.title, job_path(jobs_application.job) %> position
                 <%= jobs_application.created_at.strftime("on %Y-%m-%d") %><br>
                 Recruiter: <%= link_to jobs_application.job.user.username, user_path(jobs_application.job.user) %>
 
+              </div>
 
-            </li>
+
+            </div>
           <% end -%>
 
         </div>
 
-      </ul>
     </div>
   </div>
 </div>

@@ -5,42 +5,46 @@
     </div>
     <div class="card-body">
       <%== pagy_bootstrap_nav(@pagy)  %>
-      <ul>
-        <% @jobs.each do |job| %>
-          <li>
+      <% unless @jobs.blank? %>
+        <ul>
+          <% @jobs.each do |job| %>
+            <li>
 
-            <p>
-              <h5><%= link_to job.title, my_user_job_path(current_user, job) %></h5>
-              Applicants:
+              <p>
+                <h5><%= link_to job.title, my_user_job_path(current_user, job) %></h5>
+                Applicants:
 
 
-                  <% unless job.jobs_applications.blank? %>
+                    <% unless job.jobs_applications.blank? %>
 
-                    <div class="row">
+                      <div class="row">
 
-                        <% job.jobs_applications.each do |jobs_application| %>
-                          <div class="card rounded-pill mb-3 mr-2 col-8 col-md-3">
-                            <div class="card-body">
-                              <%= link_to jobs_application.user.username, user_path(jobs_application.user) %> - <%= jobs_application.user.job_position %>
+                          <% job.jobs_applications.each do |jobs_application| %>
+                            <div class="card rounded-pill mb-3 mr-2 col-8 col-md-3">
+                              <div class="card-body">
+                                <%= link_to jobs_application.user.username, user_path(jobs_application.user) %> - <%= jobs_application.user.job_position %>
 
+                              </div>
                             </div>
-                          </div>
-                        <% end -%>
+                          <% end -%>
 
 
 
-                    </div>
+                      </div>
 
 
-                <% else %>
-                  No candidates.
-                  <% end -%>
-            </p>
+                  <% else %>
+                    No candidates.
+                    <% end -%>
+              </p>
 
-          </li>
-        <% end -%>
+            </li>
+          <% end -%>
 
-      </ul>
+        </ul>
+      <% else %>
+        <p>You don't have any jobs.</p>
+      <% end -%>
     </div>
   </div>
 </div>

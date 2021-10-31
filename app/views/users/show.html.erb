@@ -1,8 +1,14 @@
 <div class="container mt-3">
   <div class="card rounded-lg mb-3">
     <div class="card-header text-center">
-      <h1><%= @user.username %>'s profile</h1>
-
+      <h1>
+        <% if @user.profile_picture.attached? %>
+          <%= cl_image_tag @user.profile_picture.key, class: "avatar-large" %>
+        <% else %>
+          <%= image_tag "no-avatar.png", class: "avatar-large" %>
+        <% end -%>
+        <%= @user.username %>'s profile
+      </h1>
     </div>
     <div class="card-body">
       <div class="row mb-3 justify-content-center">

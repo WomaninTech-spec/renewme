@@ -1,6 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: #B1ABF5;
+  color: white;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -23,4 +24,11 @@
   border-radius: 20px;
   border: 1px solid white;
   padding: 5px 32px !important;
+}
+
+.username {
+  width: 80%;
+  padding: 0 10px;
+  margin: 0 auto;
+  text-decoration: underline;
 }

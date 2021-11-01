@@ -1,7 +1,7 @@
 .card-skill {
   overflow: hidden;
   height: 100px;
-  background: #D6DBF2;
+  background: $current-skill;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
   margin-bottom: 15px;
 }
 .card-skill.previous-skills {
-  background: #E4D6F2;
+  background: $previous-skill;
 }
 
 .card-skill img {

@@ -24,9 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import 'trix/dist/trix.css';
 
-const Trix  = require("trix")
 
 var jQuery = require('jquery')
 
@@ -39,6 +37,9 @@ import { initChatroomCable } from '../channels/chatroom_channel.js'
 import { initNotificationsCable } from '../channels/notifications_channel.js'
 import { initMsgUnread } from '../helpers/init_msg_unread.js'
 import { markRead } from '../helpers/init_mark_read.js'
+import { initTrix } from '../plugins/init_trix.js'
+
+const Trix  = require("trix")
 
 Trix.config.blockAttributes.heading2 = {
   tagName: 'h2',
@@ -52,20 +53,21 @@ Trix.config.blockAttributes.heading3 = {
   breakOnReturn: true,
   group: false
 }
+
 addEventListener("trix-initialize", event => {
   const { toolbarElement } = event.target
   const h1Button = toolbarElement.querySelector("[data-trix-attribute=heading1]")
   h1Button.insertAdjacentHTML("afterend", `
     <button type="button" class="trix-button" data-trix-attribute="heading2" title="Heading 2" tabindex="-1" data-trix-active="">H2</button>
   `)
-})
-addEventListener("trix-initialize", event => {
-  const { toolbarElement } = event.target
   const h2Button = toolbarElement.querySelector("[data-trix-attribute=heading2]")
   h2Button.insertAdjacentHTML("afterend", `
     <button type="button" class="trix-button" data-trix-attribute="heading3" title="Heading 3" tabindex="-1" data-trix-active="">H3</button>
   `)
 })
+
+
+///////////////////////
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   initSelect2();
@@ -75,6 +77,7 @@ document.addEventListener('turbolinks:load', () => {
   initMsgUnread();
   //setInterval(()=>{initMsgUnread()}, 3000);
   markRead();
+  initTrix();
 
 
 });

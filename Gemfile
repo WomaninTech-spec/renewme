@@ -36,6 +36,7 @@ gem 'cloudinary'
 gem 'pg_search'
 gem 'active_link_to'
 gem 'pagy'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'pry-byebug'

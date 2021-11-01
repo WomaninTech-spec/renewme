@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit :sign_in, keys: [:login, :password]
   end
+
+  def after_sign_in_path_for(resource)
+    if resource.class == Admin
+      rails_admin_path
+    else
+      # Change profile_path to where you want regular users to go
+      stored_location_for(resource) || root_path
+    end
+  end
 end

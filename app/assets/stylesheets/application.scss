@@ -67,4 +67,21 @@
 // .trix-content h1 {
 //   font-size: 24px;
 // }
+// TRIX
+.attachment {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+}
 
+.attachment img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+blockquote:first-child {
+  font-style: italic;
+  padding-left: 15px;
+  color: grey;
+}

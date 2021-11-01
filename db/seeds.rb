@@ -246,4 +246,6 @@ if User.where(email:"bertrand@example.com").first.nil?
   user_1.skip_confirmation!
   user_1.save!
 end
-
+if Admin.where(email:"admin@example.com").first.nil?
+  Admin.create!(username: "admin", email: "admin@example.com", password: "password") if Rails.env.development?
+end

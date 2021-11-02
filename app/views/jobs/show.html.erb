@@ -19,6 +19,9 @@
               <% end -%>
             </td>
           <% end -%>
+          <td class="pr-2">
+            <%= link_to "Back to Jobs", jobs_path, class: 'btn btn-outline-secondary rounded-pill' %>
+          </td>
           <td>
             Recruiter: <%= link_to @job.user.username, user_path(@job.user) %>
 
@@ -27,8 +30,6 @@
       </table>
       <hr>
       <p><%= @job.description.html_safe %></p>
-
-      <%= link_to "Back to Jobs", jobs_path %>
 
     </div>
   </div>

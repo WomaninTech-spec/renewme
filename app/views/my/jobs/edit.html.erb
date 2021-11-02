@@ -10,7 +10,11 @@
 
         <%= f.input :description, as: :hidden %>
         <trix-editor input="job_description"></trix-editor>
-        <%= f.input :visible %>
+        <%#= f.input :visible %>
+        <div class="custom-control custom-switch mt-3 mb-3">
+          <%= f.check_box :visible, class: "custom-control-input", id: "customSwitch1" %>
+          <label class="custom-control-label" for="customSwitch1">Make your job visible and searchable</label>
+        </div>
         <%= f.button :submit, class: 'btn btn-outline-primary rounded-pill' %>
         <%= link_to 'Back', my_user_jobs_path, class: 'btn btn-outline-primary rounded-pill' %>
       <% end -%>

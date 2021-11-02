@@ -6,9 +6,13 @@ const initChatroomCable = () => {
   const input = document.getElementById('message_content');
   if (messagesContainer) {
     const id = messagesContainer.dataset.chatroomId;
+
     consumer.subscriptions.create({ channel: "ChatroomChannel", id: id }, {
       connected () {
           console.log('connected')
+        },
+      disconnected () {
+          console.log('disconnected')
         },
       received(data) {
 

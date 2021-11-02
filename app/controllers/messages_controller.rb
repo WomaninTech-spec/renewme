@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     @chatroom = @message.chatroom
-    p "chatroom = #{@chatroom}"
+    #p "chatroom = #{@chatroom}"
     #@other_user = @chatroom.messages.where.not(user: current_user).first.user
     if @message.save
       ChatroomChannel.broadcast_to(

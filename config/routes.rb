@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount ActionCable.server => '/cable'
   devise_for :users
   root to: 'pages#home'
   resources :articles

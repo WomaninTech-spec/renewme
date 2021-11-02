@@ -10,7 +10,11 @@ const initNotificationsCable = () => {
       connected () {
           console.log('connected')
       },
+      disconnected () {
+          console.log('disconnected')
+      },
       received(data) {
+        console.log("received dataa")
         notifications.insertAdjacentHTML('beforeend', data);
         initMsgUnread();
       },

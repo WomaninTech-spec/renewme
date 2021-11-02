@@ -1,4 +1,5 @@
 class My::ExperiencesController < ApplicationController
+  before_action :set_experience, only: [:edit, :update, :destroy]
   def new
     @experience = Experience.new
     respond_to do |format|
@@ -18,13 +19,29 @@ class My::ExperiencesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @experience.update(experience_params)
+    if @experience.save
+      flash[:notice] = "Experience updated."
+      redirect_to my_user_path(current_user)
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
-    @experience = Experience.find(params[:id])
     @experience.destroy
     redirect_to my_user_path(current_user)
   end
 
   private
+
+  def set_experience
+    @experience = Experience.find(params[:id])
+  end
 
   def experience_params
     params.require(:experience).permit(:start_date, :end_date, :content)

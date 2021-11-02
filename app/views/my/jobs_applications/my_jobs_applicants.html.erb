@@ -8,6 +8,7 @@
       <% unless @jobs.blank? %>
         <ul>
           <% @jobs.each do |job| %>
+                    <% unless job.jobs_applications.blank? %>
             <li>
 
               <p>
@@ -15,7 +16,6 @@
                 Applicants:
 
 
-                    <% unless job.jobs_applications.blank? %>
 
                       <div class="row">
 
@@ -33,12 +33,11 @@
                       </div>
 
 
-                  <% else %>
-                    No candidates.
-                    <% end -%>
               </p>
 
+
             </li>
+                    <% end -%>
           <% end -%>
 
         </ul>

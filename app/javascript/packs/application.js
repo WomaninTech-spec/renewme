@@ -66,12 +66,6 @@ addEventListener("trix-initialize", event => {
   `)
 })
 
-const reload = () => {
-  const messages = document.getElementById('chatrooms')
-  if(messages){
-    setInterval(()=>{window.location.reload()}, 5000);
-  }
-}
 ///////////////////////
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:

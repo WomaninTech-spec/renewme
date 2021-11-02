@@ -17,6 +17,7 @@ const initNotificationsCable = () => {
         console.log("received dataa")
         notifications.insertAdjacentHTML('beforeend', data);
         initMsgUnread();
+        setTimeout(()=>{ $('.alert').alert('close') }, 5000);
       },
     });
   }

@@ -7,6 +7,9 @@ const initNotificationsCable = () => {
   if (notifications) {
     const id = notifications.dataset.userId;
     consumer.subscriptions.create({ channel: "NotificationsChannel", id: id }, {
+      connected () {
+          console.log('connected')
+      },
       received(data) {
         notifications.insertAdjacentHTML('beforeend', data);
         initMsgUnread();

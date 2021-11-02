@@ -7,10 +7,14 @@ const initChatroomCable = () => {
   if (messagesContainer) {
     const id = messagesContainer.dataset.chatroomId;
     consumer.subscriptions.create({ channel: "ChatroomChannel", id: id }, {
+      connected () {
+          console.log('connected')
+        },
       received(data) {
+
         messagesContent.insertAdjacentHTML('beforeend', data);
         input.value = ""
-      },
+      }
     });
   }
 }

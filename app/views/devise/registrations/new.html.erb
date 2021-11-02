@@ -26,7 +26,11 @@
           <%= f.input :about_me, as: :text %>
           <%= f.input :profile_picture, as: :file %>
           <%= f.input :role, as: :radio_buttons, collection: User.roles, checked: User.roles.first %>
-          <%= f.input :visible, label: "Make your profile visible and searchable" %>
+          <%#= f.input :visible, label: "Make your profile visible and searchable" %>
+          <div class="custom-control custom-switch mb-3">
+            <%= f.check_box :visible, class: "custom-control-input", id: "customSwitch1" %>
+            <label class="custom-control-label" for="customSwitch1">Make your profile visible and searchable</label>
+          </div>
         </div>
 
         <div class="form-actions">

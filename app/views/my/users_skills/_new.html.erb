@@ -7,8 +7,13 @@
 <div class="modal-body">
   <%= simple_form_for([current_user, @users_skill], url: my_user_users_skills_path, remote: true) do |f| %>
     <%= f.association :skill, collection: @skills, input_html: { class: "select2" } %>
-    <%= f.input :level, collection: UsersSkill.levels%>
-    <%= f.input :previous_skills %>
+    <%= f.input :level, collection: UsersSkill.levels, input_html: {class: "current_skills_level"} %>
+    <%#= f.input :previous_skills %>
+    <br>
+    <div class="custom-control custom-switch mb-3">
+      <%= f.check_box :previous_skills, class: "custom-control-input", id: "customSwitch1" %>
+      <label class="custom-control-label" for="customSwitch1">Previous skill</label>
+    </div>
     <%= f.button :submit, class: 'btn btn-outline-primary' %>
   <% end -%>
 </div>

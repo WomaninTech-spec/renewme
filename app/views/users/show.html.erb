@@ -257,7 +257,7 @@
                 <div class="card-job rounded-pill">
                   <div class="card-job-infos">
                     <h2><%= link_to job.title, job_path(job) %></h2>
-                    <p><%= job.description.truncate(150, separator: ' ') %></p>
+                    <p><%= job.description.gsub(/(<[^>]+>)/, '').truncate(150, separator: ' ') %></p>
                   </div>
                 </div>
               <% end -%>

@@ -18,6 +18,10 @@ const initNotificationsCable = () => {
         notifications.insertAdjacentHTML('beforeend', data);
         initMsgUnread();
         setTimeout(()=>{ $('.alert').alert('close') }, 5000);
+        const messages = document.getElementById('chatrooms')
+        if(messages){
+          setTimeout(()=>{window.location.reload()}, 5000);
+        }
       },
     });
   }

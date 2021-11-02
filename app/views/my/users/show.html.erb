@@ -40,6 +40,12 @@
                     <p><%#= user_skill.level.capitalize %></p>
                     <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
                   </div>
+                  <%= link_to 'Edit', edit_my_user_users_skill_path(current_user,user_skill), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => "#modal-skill", class: 'btn btn-outline-primary rounded-pill mr-1'}  %>
+                  <div id="modal-skill" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content"></div>
+                    </div>
+                  </div>
                   <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
                 </div>
                 <% unless user_skill.recommandations.blank? %>
@@ -83,6 +89,7 @@
                     <p><%#= user_skill.level.capitalize %></p>
                     <div class="d-flex"><%= "<div class='level'></div>".html_safe * (UsersSkill.levels[user_skill.level]+1) %></div>
                   </div>
+                  <%= link_to 'Edit', edit_my_user_users_skill_path(current_user,user_skill), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => "#modal-skill", class: 'btn btn-outline-primary rounded-pill mr-1'}  %>
                   <%= link_to 'Delete', my_user_users_skill_path(current_user,user_skill), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill mr-3' %>
                 </div>
                 <% unless user_skill.recommandations.blank? %>
@@ -125,6 +132,7 @@
                       <em><%= experience.content %></em>
                     </li>
                     <div>
+                      <%= link_to 'Edit', edit_my_user_experience_path(current_user,experience), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => "#modal-experience", class: 'btn btn-outline-primary rounded-pill mr-1'} %>
                       <%= link_to 'Delete', my_user_experience_path(current_user,experience), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger rounded-pill' %>
                     </div>
 

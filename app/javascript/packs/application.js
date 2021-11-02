@@ -70,10 +70,10 @@ addEventListener("trix-initialize", event => {
 ///////////////////////
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  initSelect2();
-  initBarRating();
   initChatroomCable();
   initNotificationsCable();
+  initSelect2();
+  initBarRating();
   initMsgUnread();
   //setInterval(()=>{initMsgUnread()}, 3000);
   markRead();

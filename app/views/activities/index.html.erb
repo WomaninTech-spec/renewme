@@ -6,10 +6,13 @@
     </div>
     <div class="card-body">
       <%== pagy_bootstrap_nav(@pagy) %>
-      <% @activities.each do |activity| %>
-        <p><%= activity.description.html_safe %> <%= activity.created_at.strftime("on %Y-%m-%d") %> <%= activity.created_at.strftime("at %H:%M") %></p>
+      <% unless @activities.blank? %>
+        <% @activities.each do |activity| %>
+          <p><%= activity.description.html_safe %> <%= activity.created_at.strftime("on %Y-%m-%d") %> <%= activity.created_at.strftime("at %H:%M") %></p>
+        <% end -%>
+      <% else %>
+        <p>No activity yet.</p>
       <% end -%>
-
     </div>
   </div>
 </div>

@@ -8,6 +8,17 @@
   border-radius: 50px;
 }
 
+.card.job {
+  background: $job !important;
+}
+
+.job-skills {
+  overflow-y:scroll;
+  max-height: 50px;
+  border: 1px solid #D6DBF2;
+  border-radius: 50px;
+  background:#D6DBF2;
+}
 
 .card-job h1 {
   font-size: 18px;

@@ -19,6 +19,10 @@ class My::JobsController < ApplicationController
     @job = Job.new(job_params)
     @job.user = current_user
     if @job.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} posted a new job: #{view_context.link_to @job.title, job_path(@job)}",
+        user: current_user
+      ) if @job.visible
       redirect_to my_user_job_path(current_user,@job)
     else
       render :new

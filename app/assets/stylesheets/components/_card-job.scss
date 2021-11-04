@@ -15,12 +15,13 @@
 .job-skills {
   overflow-y:scroll;
   max-height: 50px;
-  border: 1px solid #D6DBF2;
+  border: 1px solid $current-skill;
   border-radius: 50px;
-  background:#D6DBF2;
+  background: $current-skill;
   margin: 0;
   padding: 0px 5px 5px 10px;
 }
+
 .job-skills li {
   margin: 0;
   padding-left: 20px ;

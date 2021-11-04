@@ -16,7 +16,7 @@
                     <% job.jobs_applications.order(created_at: :desc).each do |jobs_application| %>
                       <div class="card job rounded-pill mb-3 mr-2 col-10 col-md-5 col-lg-auto">
                         <div class="card-body">
-                          <h6><%= link_to jobs_application.user.username, user_path(jobs_application.user) %> - <%= jobs_application.user.job_position %> <%= jobs_application.created_at.strftime("on %Y-%m-%d") %></h6>
+                          <h6><%= link_to jobs_application.user.username, user_path(jobs_application.user) %> - <%= jobs_application.user.job_position %> applied <%= jobs_application.created_at.strftime("on %Y-%m-%d") %></h6>
 
                           <ul class="job-skills">
                             <% unless jobs_application.user.users_skills.where(previous_skills: false).blank? %>

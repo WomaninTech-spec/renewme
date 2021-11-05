@@ -26,7 +26,11 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :username, :job_position, :about_me, presence: true
   validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 3 }
+  validates :about_me, length: { minimum: 20 }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
+  validates :password, format: { with: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+                                 message: "Complexity requirement not met. Please use: 1 uppercase,
+                                  1 lowercase, 1 digit and 1 special character" }
 
   pg_search_scope :global_search,
     against: [:username, :job_position, :role],

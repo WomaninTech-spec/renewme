@@ -38,6 +38,7 @@ import { initNotificationsCable } from '../channels/notifications_channel.js'
 import { initMsgUnread } from '../helpers/init_msg_unread.js'
 import { markRead } from '../helpers/init_mark_read.js'
 import { initTrix } from '../plugins/init_trix.js'
+import { previewImageOnFileSelect } from '../plugins/photo_previews.js'
 
 const Trix  = require("trix")
 
@@ -77,6 +78,7 @@ document.addEventListener('turbolinks:load', () => {
   //setInterval(()=>{initMsgUnread()}, 3000);
   markRead();
   initTrix();
+  previewImageOnFileSelect();
   //reload();
 
 });

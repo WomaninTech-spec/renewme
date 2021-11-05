@@ -12,6 +12,10 @@ class My::ExperiencesController < ApplicationController
     @experience = Experience.new(experience_params)
     @experience.user = current_user
     if @experience.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} added a new experience.",
+        user: current_user
+      ) if current_user.visible
       flash[:notice] = "Experience added."
       redirect_to my_user_path(current_user)
     else
@@ -25,6 +29,10 @@ class My::ExperiencesController < ApplicationController
   def update
     @experience.update(experience_params)
     if @experience.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} updated an experience.",
+        user: current_user
+      ) if current_user.visible
       flash[:notice] = "Experience updated."
       redirect_to my_user_path(current_user)
     else

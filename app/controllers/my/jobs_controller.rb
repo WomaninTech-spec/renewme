@@ -37,6 +37,10 @@ class My::JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.update(job_params)
     if @job.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} updated the job: #{view_context.link_to @job.title, job_path(@job)}",
+        user: current_user
+      ) if @job.visible
       redirect_to my_user_job_path(@job)
     else
       render :edit

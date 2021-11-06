@@ -8,7 +8,30 @@
   border-radius: 50px;
 }
 
+.card.job {
+  background: $job !important;
+}
 
+.job-skills {
+  overflow-y:scroll;
+  max-height: 50px;
+  border: 1px solid $current-skill;
+  border-radius: 50px;
+  background: $current-skill;
+  margin: 0;
+  padding: 0px 5px 5px 10px;
+}
+
+.job-skills li {
+  margin: 0;
+  padding-left: 20px ;
+  list-style: none;
+  background-image: image-url("logo-renewme.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 15px;
+
+}
 .card-job h1 {
   font-size: 18px;
   font-weight: bold;
@@ -36,7 +59,7 @@
 }
 
 .card-job .card-job-infos {
-  padding: 16px 32px;
+  padding: 16px 32px 5px 32px;
 }
 .card-job-description{
   overflow: auto;

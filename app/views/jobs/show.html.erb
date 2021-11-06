@@ -9,6 +9,17 @@
         <tr>
           <% if current_user.role == "candidate" %>
             <td class="pr-2">
+                <% unless @followings_job.id %>
+                  <%= simple_form_for(@followings_job) do |f|%>
+                    <%= f.hidden_field :job_id, value: @followings_job.job.id %>
+                    <%= f.button :submit, value: "Follow", class: "btn btn-outline-primary rounded-pill" %>
+                  <% end -%>
+                <% else %>
+                  <%= link_to 'Unfollow', followings_job_path(@followings_job), method: :delete, class: 'btn btn-outline-warning rounded-pill' %>
+                <% end -%>
+            </td>
+
+            <td class="pr-2">
 
               <% if @jobs_application.user.nil? %>
                 <%= simple_form_for([@job, @jobs_application], remote: true) do |f| %>
@@ -19,6 +30,9 @@
               <% end -%>
             </td>
           <% end -%>
+          <td class="pr-2">
+            <%= link_to "Back to Jobs", jobs_path, class: 'btn btn-outline-secondary rounded-pill' %>
+          </td>
           <td>
             Recruiter: <%= link_to @job.user.username, user_path(@job.user) %>
 
@@ -27,8 +41,6 @@
       </table>
       <hr>
       <p><%= @job.description.html_safe %></p>
-
-      <%= link_to "Back to Jobs", jobs_path %>
 
     </div>
   </div>

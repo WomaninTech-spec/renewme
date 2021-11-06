@@ -12,6 +12,10 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user = current_user
     if @article.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} posted a new article: #{view_context.link_to @article.title, article_path(@article)} on ",
+        user: current_user
+      )
       redirect_to articles_path
     else
       render :new

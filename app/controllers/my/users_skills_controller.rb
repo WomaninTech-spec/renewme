@@ -14,6 +14,10 @@ class My::UsersSkillsController < ApplicationController
     @users_skill = UsersSkill.new(users_skill_params)
     @users_skill.user = current_user
     if @users_skill.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} added a new skill: #{@users_skill.skill.name}",
+        user: current_user
+      ) if current_user.visible
       flash[:notice] = "Skill added."
       redirect_to my_user_path(current_user)
     else
@@ -29,6 +33,10 @@ class My::UsersSkillsController < ApplicationController
     params[:users_skill][:level] = params[:users_skill][:level].to_i unless params[:users_skill][:level] == ""
     @users_skill.update(users_skill_params)
     if @users_skill.save
+      Activity.create!(
+        description: "#{view_context.link_to current_user.username, user_path(current_user)} updated the skill: #{@users_skill.skill.name}",
+        user: current_user
+      ) if current_user.visible
       flash[:notice] = "Skill updated."
       redirect_to my_user_path(current_user)
     end

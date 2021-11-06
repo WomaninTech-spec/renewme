@@ -3,19 +3,48 @@
     <div class="card-header">
       <h1>Articles posting</h1>
     </div>
-
     <div class="card-body">
-      <%= link_to "Write a new article", new_article_path %>
-      <div class="cards">
-        <div class="card-article">
-          <% @articles.each do |article| %>
-            <h3><%= article.title %></h3>
-            <p><%= article.content %></p>
-            <%= link_to "Go to see", article_path(article) %>
-            <%= link_to "Delete", article_path(article), method: :delete %>
+      <div class="row">
+        <div class="col-12 col-md-9">
+          <%= form_tag articles_path, method: :get, class: "form-inline mb-3" do %>
+          <table>
+            <tr>
+              <td>
+                <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control rounded-pill",
+                  type: "search",
+                  placeholder: "Find an article"
+                %>
+              <td>
+                <%= submit_tag "Search", class: "btn btn-outline-primary rounded-pill mt-auto" %>
+              </td>
+            </tr>
+          </table>
           <% end %>
         </div>
+        <div class="col-12 col-md-2 m-auto">
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="cards mt-5">
+            <% @articles.each do |article| %>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to article.title, article_path(article) %></h5>
+                  <p class="card-text"><%= article.content %></p>
+                  <%= link_to "Delete", article_path(article), method: :delete %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <%= link_to "Write a new article", new_article_path, class:"btn btn-primary btn-lg mt-4" %>
+    </div>
   </div>
 </div>
-</div>
+

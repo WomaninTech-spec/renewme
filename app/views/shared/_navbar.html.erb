@@ -37,7 +37,7 @@
             <%= link_to "Profile", my_user_path(current_user), class: "dropdown-item" %>
 
             <% if current_user.role == "candidate" %>
-              <%= link_to "My Jobs Applications", my_jobs_applications_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
+              <%= link_to "My Jobs", my_jobs_applications_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
             <% end -%>
             <% if current_user.role == "recruiter" %>
               <%= link_to "My Jobs", my_user_jobs_path(current_user), class: "dropdown-item" %>

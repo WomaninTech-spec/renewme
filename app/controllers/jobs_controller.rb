@@ -11,6 +11,11 @@ class JobsController < ApplicationController
   def show
     @jobs_application = JobsApplication.where(user: current_user, job: @job).first
     @jobs_application = JobsApplication.new if @jobs_application.nil?
+    @followings_job = FollowingsJob.where(job: params[:id], user: current_user).first
+    unless @followings_job
+      @followings_job = FollowingsJob.new
+      @followings_job.job = @job
+    end
   end
 
   private

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get "search", on: :collection
   end
   resources :activities, only: [:index]
-
+  resources :followings_jobs, only: [:create, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users, only: [:index, :show] do
     resources :followings_users, only: [:create, :destroy]

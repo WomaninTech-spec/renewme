@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_182355) do
+ActiveRecord::Schema.define(version: 2021_11_06_125428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,15 @@ ActiveRecord::Schema.define(version: 2021_11_04_182355) do
     t.index ["user_id"], name: "index_followings_articles_on_user_id"
   end
 
+  create_table "followings_jobs", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_followings_jobs_on_job_id"
+    t.index ["user_id"], name: "index_followings_jobs_on_user_id"
+  end
+
   create_table "followings_users", force: :cascade do |t|
     t.bigint "followee_id"
     t.bigint "follower_id"
@@ -213,6 +222,8 @@ ActiveRecord::Schema.define(version: 2021_11_04_182355) do
   add_foreign_key "experiences", "users"
   add_foreign_key "followings_articles", "articles"
   add_foreign_key "followings_articles", "users"
+  add_foreign_key "followings_jobs", "jobs"
+  add_foreign_key "followings_jobs", "users"
   add_foreign_key "followings_users", "users", column: "followee_id"
   add_foreign_key "followings_users", "users", column: "follower_id"
   add_foreign_key "jobs", "users"

@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @pagy, @articles = pagy(Article.all, items: 20)
   end
   def show
     @article = Article.find(params[:id])

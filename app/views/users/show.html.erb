@@ -250,10 +250,11 @@
         <div class="card-header text-center">
           <h2>Jobs available</h2>
         </div>
-        <div class="card-body text-center">
-          <% unless @user.jobs.blank? %>
+        <div class="card-body">
+          <% unless @jobs.blank? %>
+            <%== pagy_bootstrap_nav(@pagy) %>
             <div class="cards">
-              <% @user.jobs.where(visible: true).each do |job| %>
+              <% @jobs.where(visible: true).each do |job| %>
                 <div class="card-job rounded-pill">
                   <div class="card-job-infos">
                     <h2><%= link_to job.title, job_path(job) %></h2>

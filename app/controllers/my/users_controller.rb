@@ -3,5 +3,6 @@ class My::UsersController < ApplicationController
     @current_users_skills = UsersSkill.where(user: current_user, previous_skills: false)
     @previous_users_skills = UsersSkill.where(user: current_user, previous_skills: true)
     @experiences = Experience.where(user: current_user).order(start_date: :desc)
+    @pagy, @jobs = pagy(current_user.jobs, items: 8)
   end
 end

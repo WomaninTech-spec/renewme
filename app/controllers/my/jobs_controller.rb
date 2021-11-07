@@ -1,6 +1,6 @@
 class My::JobsController < ApplicationController
   def index
-    @jobs = current_user.jobs
+    @pagy, @jobs = pagy(current_user.jobs, items: 8)
   end
 
   def show

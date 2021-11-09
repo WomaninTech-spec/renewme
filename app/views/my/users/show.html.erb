@@ -201,7 +201,7 @@
 
           <% unless current_user.followees.blank? %>
             <% @current_user.followees.each do |follower| %>
-              <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
+              <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill mb-1' %>
             <% end -%>
           <% else %>
             <p>No followers.</p>
@@ -218,7 +218,7 @@
         <div class="card-body">
           <% unless @current_user.followers.blank? %>
             <% @current_user.followers.each do |followee| %>
-              <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
+              <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill mb-1' %>
             <% end -%>
           <% else %>
             <p>No followees.</p>

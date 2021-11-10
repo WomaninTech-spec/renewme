@@ -1,10 +1,63 @@
 <div class="container mt-3">
+  <div class="card rounded-lg mb-3">
+    <div class="card-header">
+      <h1>My Jobs</h1>
+    </div>
+    <div class="card-body">
+      <!-- <div class="row">
+        <div class="col-12 col-md-9">
+          <%#= form_tag users_path, method: :get, class: "form-inline mb-3" do %>
+            <table>
+            </table>
+          <%# end %>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-12 col-lg-9">
+          <%= link_to "Post a new job", new_my_user_job_path, class: 'btn btn-outline-primary rounded-pill mb-3', remote: true, "data-toggle": "modal", "data-target": "#modal-job"  %>
+        </div>
+        <div class="col-12 col-lg-2">
+          <%== pagy_bootstrap_nav(@pagy_jobs) %>
+        </div>
+      </div>
+      <div id="modal-job" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+      <% unless @jobs.blank? %>
+        <div class="cards mt-3">
+            <% @jobs.each do |job| %>
+              <div class="card-job">
+                <div class="card-job-infos">
+                  <h2><%= link_to job.title, my_user_job_path(current_user, job) %></h2>
+                  <div class="card-job-description mb-1"><%= job.description.gsub(/(<[^>]+>)/, '').truncate(150, separator: ' ') %></div>
+                  Published: <%= job.visible ? "Yes" : "No" %><br>
+                  <%= link_to "Edit", edit_my_user_job_path(current_user,job) %>
+                  <%= link_to "Delete", my_user_job_path(current_user,job), method: :delete %>
+
+                </div>
+
+              </div>
+            <% end %>
+        </div>
+      <% else %>
+        <p>You didn't post any jobs yet.</p>
+      <% end -%>
+    </div>
+  </div>
+
   <div class="card rounded-lg">
     <div class="card-header">
       <h1>My Jobs Applicants</h1>
     </div>
     <div class="card-body">
-      <%== pagy_bootstrap_nav(@pagy)  %>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <%== pagy_bootstrap_nav(@pagy)  %>
+
+        </div>
+      </div>
       <% unless @jobs.blank? %>
         <% @jobs.each do |job| %>
           <% unless job.jobs_applications.blank? %>

@@ -2,12 +2,16 @@
   <div class="card">
     <div class="card-header">
       <h1>Write a new article</h1>
+    </div>
+    <div class="card-body">
       <%= simple_form_for(@article) do |f| %>
         <%= f.input :title, label: "Write the title of the article", placeholder: "your title here" %>
-        <%= f.input :content, label: "Enter the content of the article", placeholder: "your content here" %>
-
+        <%= f.input :content, as: :hidden, label: "Enter the content of the article" %>
+        <trix-editor input="article_content"></trix-editor>
+        <br>
         <%= f.submit "Create your article", class: "btn btn-primary btn-lg" %>
       <% end %>
+
     </div>
   </div>
 </div>

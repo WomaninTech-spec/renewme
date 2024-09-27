@@ -12,6 +12,7 @@ if Skill.count == 0
   file = File.read('skills.json')
   data_hash = JSON.parse(file)
   data_hash["data"].each do |skill|
+    break if Skill.count > 9000
     Skill.create!(name: skill["name"])
   end
 end

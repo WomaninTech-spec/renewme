@@ -171,9 +171,10 @@
           <h2>My Jobs</h2>
         </div>
         <div class="card-body">
-          <% unless current_user.jobs.blank? %>
+          <%== pagy_bootstrap_nav(@pagy) %>
+          <% unless @jobs.blank? %>
             <div class="cards">
-              <% current_user.jobs.each do |job| %>
+              <% @jobs.each do |job| %>
                 <div class="card-job rounded-pill">
                   <div class="card-job-infos">
                     <h2><%= link_to job.title, job_path(job) %></h2>
@@ -200,7 +201,7 @@
 
           <% unless current_user.followees.blank? %>
             <% @current_user.followees.each do |follower| %>
-              <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill' %>
+              <%= link_to follower.follower.username, user_path(follower.follower), class: 'btn btn-outline-secondary rounded-pill mb-1' %>
             <% end -%>
           <% else %>
             <p>No followers.</p>
@@ -217,7 +218,7 @@
         <div class="card-body">
           <% unless @current_user.followers.blank? %>
             <% @current_user.followers.each do |followee| %>
-              <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill' %>
+              <%= link_to followee.followee.username, user_path(followee.followee), class: 'btn btn-outline-secondary rounded-pill mb-1' %>
             <% end -%>
           <% else %>
             <p>No followees.</p>

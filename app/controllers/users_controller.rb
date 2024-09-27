@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @current_users_skills = UsersSkill.where(user: @user, previous_skills: false)
     @previous_users_skills = UsersSkill.where(user: @user, previous_skills: true)
     @experiences = Experience.where(user: @user).order(start_date: :desc)
+    @pagy, @jobs = pagy(@user.jobs, items: 8)
     @message = Message.new
     @chatroom = current_user.find_or_create_chatroom_with(@user)
     @message.chatroom = @chatroom

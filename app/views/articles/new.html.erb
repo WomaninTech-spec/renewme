@@ -1,22 +1,18 @@
-<div class="modal-header">
-  <h5 class="modal-title">Add a new article</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-<%= simple_form_for @article do |f| %>
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h1>Write a new article</h1>
+    </div>
+    <div class="card-body">
+      <%= simple_form_for(@article) do |f| %>
+        <%= f.input :title, label: "Write the title of the article", placeholder: "your title here" %>
+        <%= f.input :content, as: :hidden, label: "Enter the content of the article" %>
+        <trix-editor input="article_content"></trix-editor>
+        <br>
+        <%= f.submit "Create your article", class: "btn btn-primary btn-lg" %>
+      <% end %>
 
-  <%= f.label :title, "Enter the title of the article" %>
-  <%= f.text_field :title %>
-
-  <%= f.label :content, "Enter the content of the article" %>
-  <%= f.text_field :content %>
-
-  <%= f.submit %>
-<% end %>
+    </div>
+  </div>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Post</button>
-  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-</div>
+

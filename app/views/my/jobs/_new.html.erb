@@ -10,7 +10,7 @@
     <%= f.input :title, label: "Enter the title of the job" %>
 
     <%= f.input :description, as: :hidden %>
-    <trix-editor input="job_description" style="height: 400px;overflow-y:auto">></trix-editor>
+    <trix-editor input="job_description" style="height: 400px;overflow-y:auto"></trix-editor>
     <%#= f.input :visible %>
     <div class="custom-control custom-switch mt-3 mb-3">
       <%= f.check_box :visible, class: "custom-control-input", id: "customSwitch1" %>

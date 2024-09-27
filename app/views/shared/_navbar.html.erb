@@ -37,11 +37,11 @@
             <%= link_to "Profile", my_user_path(current_user), class: "dropdown-item" %>
 
             <% if current_user.role == "candidate" %>
-              <%= link_to "My Jobs Applications", my_jobs_applications_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
+              <%= link_to "My Jobs", my_jobs_applications_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
             <% end -%>
             <% if current_user.role == "recruiter" %>
-              <%= link_to "My Jobs", my_user_jobs_path(current_user), class: "dropdown-item" %>
-              <%= link_to "My Jobs Applicants", my_jobs_applicants_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
+              <%#= link_to "My Jobs", my_user_jobs_path(current_user), class: "dropdown-item" %>
+              <%= link_to "My Jobs", my_jobs_applicants_my_user_jobs_applications_path(current_user), class: "dropdown-item" %>
             <% end -%>
             <div style="position:relative;"><%= link_to "Messages", user_messages_path(current_user), class: "dropdown-item" %><div id="messages-unread-menu"></div></div>
             <%= link_to "Activity", activities_path, class: "dropdown-item"%>
